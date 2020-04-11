@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QDialog>
 #include "audienceview.h"
+#include "mathclass.h"
 #include <QLabel>
 
 namespace Ui {
@@ -107,6 +108,11 @@ private slots:
     void on_SlingOne_linkActivated(const QString &link);
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
+
+public:
+    mathClass myM;
+    void getMSD(int startVal);
+    int beginScore;
 };
 
 #endif // SCORERVIEW_H

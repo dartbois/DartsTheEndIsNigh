@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "scorerview.h"
 #include "audienceview.h"
+#include "matchstartdata.h"
 
 namespace Ui {
 class GameSelectionMenu;
@@ -25,6 +26,9 @@ private:
     Ui::GameSelectionMenu *ui;
     AudienceView* audienceWindow;
     ScorerView* scorerWindow;
+    void sendScorerViewMSD(int startVal);
+    public:
+        MatchStartData myMSD;
 };
 
 #endif // GAMESELECTIONMENU_H

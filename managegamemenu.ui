@@ -91,7 +91,7 @@
       </size>
      </property>
      <property name="cursor" stdset="0">
-      <cursorShape>WaitCursor</cursorShape>
+      <cursorShape>ArrowCursor</cursorShape>
      </property>
     </widget>
    </item>

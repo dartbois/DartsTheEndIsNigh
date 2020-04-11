@@ -4,6 +4,9 @@
 #include "player.h"
 #include "mathclass.h"
 #include "matchstartdata.h"
+#include "scorerview.h"
+#include <QDir>
+#include <QDebug>
 
 using namespace std;
 
@@ -12,8 +15,10 @@ class DataHandler
 {
 public:
     DataHandler();
+    /*
     string getData(string request);
     string setData(string request);
+    */
 
     string sqlGet(string request);
     string mathcGet(string request, mathClass myM);

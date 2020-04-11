@@ -1,6 +1,7 @@
 #ifndef SQLHANDLER_H
 #define SQLHANDLER_H
 #include "player.h"
+#include "matchstartdata.h"
 #include <QSqlDatabase>
 #include <QSqlDriver>
 #include <QSqlError>
@@ -44,7 +45,7 @@ public:
 
     void sqlAddNewPlayer(int playerID, player Player);
     void sqlRemovePlayer(int playerID);
-    void sqlAddNewGame(int gameID);
+    void sqlAddNewGame(int gameID, MatchStartData newGame);
     void sqlRemoveGame(int gameID);
 
 private:

@@ -7,6 +7,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QVariant>
+#include <QDebug>
 
 
 sqlHandler::sqlHandler(const QString& path) {
@@ -292,7 +293,7 @@ string sqlHandler::sqlGetPlayerList() {
     string temp;
     string playerInfoLine = "";
 
-    query.prepare("SELECT [Player ID], [First Name], [Last Name], Hometown, Ranking, [Num Games Played] FROM players");
+    query.prepare("SELECT [Player ID], [First Name], [Last Name], Hometown, Ranking, [Num Games Played] FROM players ORDER BY [Player ID]");
     query.exec();
 
     while (query.next()){
@@ -313,7 +314,7 @@ string sqlHandler::sqlGetGameList() {
     string temp;
     string gameInfoLine = "";
 
-    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2 FROM games");
+    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2 FROM games ORDER BY [Game ID]");
     query.exec();
 
     while (query.next()){
@@ -342,6 +343,50 @@ void sqlHandler::sqlSetGameFinal(int gameID){
 
 //Setter: needs to add a new player to the SQLite db
 void sqlHandler::sqlAddNewPlayer(int playerID, player Player){
+    QSqlQuery query;
+
+    string playerFirst, playerLast, playerHome;
+    int playerRank, playerLastWin, playerTSHi, playerTSLo, playerPlayed, playerWon;
+    float playerAvg180, playerAvg180S, playerATS, playerATSS;
+    QString QplayerFirst, QplayerLast, QplayerHome;
+
+    playerFirst = Player.playerFirst[0];
+    playerLast = Player.playerLast[0];
+    playerHome = Player.playerHometown[0];
+    playerRank = Player.playerRanking[0];
+    playerAvg180 = Player.playerAvg180s[0];
+    playerAvg180S = Player.playerAvg180Season[0];
+    playerLastWin = Player.playerLastWin[0];
+    playerATS = Player.playerAvgThrow[0];
+    playerATSS = Player.playerAvgThrowSeason[0];
+    playerTSHi = Player.playerTurnScoreHi[0];
+    playerTSLo = Player.playerTurnScoreLo[0];
+    playerPlayed = Player.playerGamesPlayed[0];
+    playerWon = Player.playerGamesWon[0];
+
+    QplayerFirst = QString::fromStdString(playerFirst);
+    QplayerLast = QString::fromStdString(playerLast);
+    QplayerHome = QString::fromStdString(playerHome);
+
+
+    query.prepare("INSERT INTO players ([Player ID], [First Name], [Last Name], Hometown, Ranking, [Avg 180s], [Avg 180s (Season)], [Last Game Win], [Avg Throw Score], [Avg Throw Score (Season)], [Turn Score High], [Turn Score Low], [Num Games Played], [Num Games Won]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    query.bindValue(0, playerID);
+    query.bindValue(1, QplayerFirst);
+    query.bindValue(2, QplayerLast);
+    query.bindValue(3, QplayerHome);
+    query.bindValue(4, playerRank);
+    query.bindValue(5, playerAvg180);
+    query.bindValue(6, playerAvg180S);
+    query.bindValue(7, playerLastWin);
+    query.bindValue(8, playerATS);
+    query.bindValue(9, playerATSS);
+    query.bindValue(10, playerTSHi);
+    query.bindValue(11, playerTSLo);
+    query.bindValue(12, playerPlayed);
+    query.bindValue(13, playerWon);
+
+    query.exec();
+    qDebug()<<query.exec()<<endl;
 
 }
 
@@ -357,8 +402,39 @@ void sqlHandler::sqlRemovePlayer(int playerID){
 }
 
 //Setter: needs to add a new game to the SQLite db
-void sqlHandler::sqlAddNewGame(int gameID){
+void sqlHandler::sqlAddNewGame(int gameID, MatchStartData newGame){
+    QSqlQuery query;
 
+    string gName, gLoc, gDate;
+    int gStart, gLegs, gMatches, gP1, gP2;
+    QString QgName, QgLoc, QgDate;
+
+    gName = newGame.gameName;
+    gLoc = newGame.gameLocation;
+    gDate = newGame.gameDate;
+    gStart = newGame.gameStartScore;
+    gLegs = newGame.gameLegs;
+    gMatches = newGame.gameMatches;
+    gP1 = newGame.gamePs[0];
+    gP2 = newGame.gamePs[1];
+
+    QgName = QString::fromStdString(gName);
+    QgLoc = QString::fromStdString(gLoc);
+    QgDate = QString::fromStdString(gDate);
+
+    query.prepare("INSERT INTO Games ([Game ID], [Game Name], Date, Location, [Start Score], [Max # Matches], [Max # Legs], Player1, Player2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    query.bindValue(0, gameID);
+    query.bindValue(1, QgName);
+    query.bindValue(2, QgDate);
+    query.bindValue(3, QgLoc);
+    query.bindValue(4, gStart);
+    query.bindValue(5, gMatches);
+    query.bindValue(6, gLegs);
+    query.bindValue(7, gP1);
+    query.bindValue(8, gP2);
+
+    query.exec();
+    qDebug()<<query.exec()<<endl;
 }
 
 //Setter: needs to remove a game from the SQLite db
