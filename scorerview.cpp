@@ -214,9 +214,10 @@ void ScorerView::on_ValadationYes_clicked()
 
 void ScorerView::on_ValadationNo_clicked()
 {
-    //Database reject code goes here
-    //SlingOneText->setVisible(false);
-    qDebug() << "This is validationNo button";
+    SlingOneText->clear();
+    SlingTwoText->clear();
+    SlingThreeText->clear();
+    emit sendValidateTrue(false);    //sending false will unblock the scoring
 }
 
 void ScorerView::on_SlingOne_linkActivated(const QString &link)
