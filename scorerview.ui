@@ -74,7 +74,7 @@
       <item>
        <widget class="QLabel" name="label_8">
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -95,7 +95,7 @@
       <item>
        <widget class="QLabel" name="label_7">
         <property name="text">
-         <string>TextLabel</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -326,7 +326,7 @@
    <item row="8" column="17">
     <widget class="QLabel" name="LegNumber">
      <property name="text">
-      <string>TextLabel</string>
+      <string/>
      </property>
     </widget>
    </item>
@@ -381,5 +381,54 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>ValadationNo</sender>
+   <signal>clicked()</signal>
+   <receiver>SlingOne</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1222</x>
+     <y>57</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1079</x>
+     <y>18</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ValadationNo</sender>
+   <signal>clicked()</signal>
+   <receiver>SlingTwo</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1220</x>
+     <y>46</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1159</x>
+     <y>21</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ValadationNo</sender>
+   <signal>clicked()</signal>
+   <receiver>SlineThree</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1229</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1219</x>
+     <y>22</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
