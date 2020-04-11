@@ -16,21 +16,20 @@ class GameSelectionMenu : public QDialog
 
 public:
     void FillGameList();
-
     explicit GameSelectionMenu(QWidget *parent = nullptr);
     ~GameSelectionMenu();
 
+private slots:
+    void on_pushButton_clicked();
+
 signals:
     void sendScorerViewMSD(int startVal);
-
-private slots:
-    void on_pushButton_clicked();  
 
 private:
     Ui::GameSelectionMenu *ui;
     AudienceView* audienceWindow;
     ScorerView* scorerWindow;
-    //void sendScorerViewMSD(int startVal);
+
     public:
         MatchStartData myMSD;
 };

@@ -44,7 +44,6 @@ public slots:
     void set_SlingThreeText(int score);
 
     void getMSD(int startVal);
-
 signals:
 
     //These signals will show the stats in the audience window
@@ -113,6 +112,7 @@ private slots:
 
 public:
     mathClass myM;
+
     int beginScore;
 };
 

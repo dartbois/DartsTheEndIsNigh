@@ -45,9 +45,6 @@ void GameSelectionMenu::FillGameList(){
     //Begin by clearing the list
     ui->listWidget->clear();
 
-    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
-    ui->listWidget->addItem(header);
-
     //Return a string of game info from sqlhandler. \n delimited.
     std::string gameInfo;
     gameInfo = myD.sqlGet("1:gameInfoList");
@@ -61,9 +58,7 @@ void GameSelectionMenu::FillGameList(){
     ui->listWidget->addItems(gameInfoList);
 }
 
-/*
-void GameSelectionMenu::sendScorerViewMSD(int startVal){
+void sendScorerViewMSD(int startVal){
     //i'm tryin'
     return;
 }
-*/
