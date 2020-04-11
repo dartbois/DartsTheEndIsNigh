@@ -12,7 +12,7 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     audienceWindow = new AudienceView();
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
-    connect(this, SIGNAL(sendScorerViewMSD(int)), scorerWindow, SLOT(getMSD(int)));
+    connect(this, SIGNAL(sendScorerViewMSD(MatchStartData)), scorerWindow, SLOT(getMSD(MatchStartData)));
 }
 
 GameSelectionMenu::~GameSelectionMenu()
@@ -31,7 +31,7 @@ void GameSelectionMenu::on_pushButton_clicked()
     int gameID = gameIDstring.toInt();
     myMSD.postInit(gameID);
     //myD.matchGSMtoSV(scorerWindow, myMSD.gameStartScore);
-    emit sendScorerViewMSD(myMSD.gameStartScore);
+    emit sendScorerViewMSD(myMSD);
 
     scorerWindow->show();
     audienceWindow->show();

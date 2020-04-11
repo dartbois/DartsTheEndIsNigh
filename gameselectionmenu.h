@@ -21,7 +21,7 @@ public:
     ~GameSelectionMenu();
 
 signals:
-    void sendScorerViewMSD(int startVal);
+    void sendScorerViewMSD(MatchStartData myMSD);
 
 private slots:
     void on_pushButton_clicked();  

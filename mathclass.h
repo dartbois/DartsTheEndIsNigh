@@ -14,6 +14,7 @@ public:
     string dataGet(string request);
     bool scoreValidator(int remScore);
     int currentScore[2]; //current score
+    int startScore;
 private:
 
 

@@ -5,6 +5,8 @@
 #include "audienceview.h"
 #include "mathclass.h"
 #include <QLabel>
+#include "matchstartdata.h"
+#include "player.h"
 
 namespace Ui {
 class ScorerView;
@@ -43,7 +45,7 @@ public slots:
 
     void set_SlingThreeText(int score);
 
-    void getMSD(int startVal);
+    void getMSD(MatchStartData myMSD);
 
 signals:
 
@@ -114,6 +116,7 @@ private slots:
 public:
     mathClass myM;
     int beginScore;
+    player myP;
 };
 
 #endif // SCORERVIEW_H
