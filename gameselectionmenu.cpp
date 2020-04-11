@@ -12,7 +12,7 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     audienceWindow = new AudienceView();
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
-    connect(this, SIGNAL(sendScorerViewMSD(int)), scorerWindow, SLOT(ScorerView::getMSD(int)));
+    connect(this, SIGNAL(sendScorerViewMSD(int)), scorerWindow, SLOT(getMSD(int)));
 }
 
 GameSelectionMenu::~GameSelectionMenu()
@@ -58,7 +58,7 @@ void GameSelectionMenu::FillGameList(){
     ui->listWidget->addItems(gameInfoList);
 }
 
-void GameSelectionMenu::sendScorerViewMSD(int startVal){
+void sendScorerViewMSD(int startVal){
     //i'm tryin'
     return;
 }

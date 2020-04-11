@@ -21,6 +21,9 @@ public:
 private slots:
     void on_AddPlayerInfo_clicked();
 
+signals:
+    void refreshList();
+
 private:
     Ui::PlayerAddEditMenu *ui;
 };

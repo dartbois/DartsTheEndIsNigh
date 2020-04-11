@@ -31,7 +31,7 @@ void PlayerAddEditMenu::on_AddPlayerInfo_clicked()
     sqlHandler mySql(path);
 
     mySql.sqlAddNewPlayer(PID, newPlayer);
-
+    emit refreshList();
     this->hide();
 }
 

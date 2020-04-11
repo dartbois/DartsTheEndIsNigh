@@ -22,11 +22,14 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+signals:
+    void sendScorerViewMSD(int startVal);
+
 private:
     Ui::GameSelectionMenu *ui;
     AudienceView* audienceWindow;
     ScorerView* scorerWindow;
-    void sendScorerViewMSD(int startVal);
+
     public:
         MatchStartData myMSD;
 };
