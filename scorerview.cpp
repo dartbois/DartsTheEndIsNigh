@@ -180,6 +180,7 @@ void ScorerView::on_ValadationYes_clicked()
     int playerceholder;
     int valHold = SlingOneText->text().toInt();
     int totalThrow;
+    /*
     bool check;
     while(validation == false){
         totalThrow = 0;
@@ -206,9 +207,9 @@ void ScorerView::on_ValadationYes_clicked()
                    validation = true;
                 }
             }
-        }
-    }
-    myM.scoreSubtract(playerceholder, totalThrow); //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
+        }*/
+
+    //myM.scoreSubtract(playerceholder, totalThrow); //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
     //Database accept code goes here
     emit sendValidateTrue(false);    //sending false will unblock the scoring
 }
@@ -239,3 +240,4 @@ void ScorerView::getMSD(int startVal){
     myM.currentScore[0] = startVal;
     myM.currentScore[1] = startVal;
 }
+
