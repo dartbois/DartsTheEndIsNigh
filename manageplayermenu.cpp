@@ -13,7 +13,7 @@ ManagePlayerMenu::ManagePlayerMenu(QWidget *parent) :
     playerAddEditMenu = new PlayerAddEditMenu();
 
     //experimental
-    connect(playerAddEditMenu, SIGNAL(refreshList), this, SLOT(refreshPlayerAdded()));
+    connect(playerAddEditMenu, SIGNAL(refreshList()), this, SLOT(refreshPlayerAdded()));
 }
 
 ManagePlayerMenu::~ManagePlayerMenu()

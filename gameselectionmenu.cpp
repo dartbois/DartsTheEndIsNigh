@@ -12,7 +12,7 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     audienceWindow = new AudienceView();
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
-    connect(this, SIGNAL(sendScorerViewMSD(int)), scorerWindow, SLOT(ScorerView::getMSD(int)));
+    connect(this, SIGNAL(sendScorerViewMSD(MatchStartData)), scorerWindow, SLOT(getMSD(MatchStartData)));
 }
 
 GameSelectionMenu::~GameSelectionMenu()
@@ -31,7 +31,7 @@ void GameSelectionMenu::on_pushButton_clicked()
     int gameID = gameIDstring.toInt();
     myMSD.postInit(gameID);
     //myD.matchGSMtoSV(scorerWindow, myMSD.gameStartScore);
-    emit sendScorerViewMSD(myMSD.gameStartScore);
+    emit sendScorerViewMSD(myMSD);
 
     scorerWindow->show();
     audienceWindow->show();
@@ -44,6 +44,9 @@ void GameSelectionMenu::FillGameList(){
 
     //Begin by clearing the list
     ui->listWidget->clear();
+
+    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
+    ui->listWidget->addItem(header);
 
     //Return a string of game info from sqlhandler. \n delimited.
     std::string gameInfo;
@@ -58,7 +61,9 @@ void GameSelectionMenu::FillGameList(){
     ui->listWidget->addItems(gameInfoList);
 }
 
+/*
 void GameSelectionMenu::sendScorerViewMSD(int startVal){
     //i'm tryin'
     return;
 }
+*/

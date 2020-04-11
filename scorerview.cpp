@@ -176,41 +176,34 @@ void ScorerView::set_SlingThreeText(int score)
 
 void ScorerView::on_ValadationYes_clicked()
 {
-    /*bool validation = false;
-    int playerceholder;
-    int valHold = SlingOneText->text().toInt();
-    int totalThrow;
-    bool check;
-    while(validation == false){
-        totalThrow = 0;
-        check = myM.scoreValidator(valHold);
-        if (check == false){
-            //say score is bad
-        }
-        else {
-            totalThrow = valHold;
-            valHold = SlingTwoText->text().toInt();
-            check = myM.scoreValidator(valHold);
-            if (check == false){
-                //say score is bad
-            }
-            else {
-                totalThrow += valHold;
-                valHold = SlingThreeText->text().toInt();
-                check = myM.scoreValidator(valHold);
-                if (check == false) {
-                    //say score is bad
-                }
-                else {
-
-                   validation = true;
-                }
-            }
-        }
+    QString slingHolder = "";
+    //code to get values from slings 1, 2, 3
+    if (myP.active == true) { //if player 1 is active
+        slingHolder = SlingOneText->text();
+        myP.p1Slings.append(slingHolder);
+        myP.p1Slings.append("-");
+        slingHolder = SlingTwoText->text();
+        myP.p1Slings.append(slingHolder);
+        myP.p1Slings.append("-");
+        slingHolder = SlingThreeText->text();
+        myP.p1Slings.append(slingHolder);
+        myP.p1Slings.append("/t");
     }
-    myM.scoreSubtract(playerceholder, totalThrow);*/ //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
-    //Database accept code goes here
-    qDebug() << "slorp";
+    else { //if myP.active is false, player2 is active
+        slingHolder = SlingOneText->text();
+        myP.p2Slings.append(slingHolder);
+        myP.p2Slings.append("-");
+        slingHolder = SlingTwoText->text();
+        myP.p2Slings.append(slingHolder);
+        myP.p2Slings.append("-");
+        slingHolder = SlingThreeText->text();
+        myP.p2Slings.append(slingHolder);
+        myP.p2Slings.append("/t");
+    }
+    //code that does score calculation and stuff
+
+    //flips a boolean value which controls which player is being affected by all this
+    myP.active = !(myP.active);
 
     emit sendValidateTrue(false);    //sending false will unblock the scoring
 }
@@ -237,7 +230,9 @@ void ScorerView::on_SlineThree_linkActivated(const QString &link)
 
 }
 
-void ScorerView::getMSD(int startVal){
-    myM.currentScore[0] = startVal;
-    myM.currentScore[1] = startVal;
+void ScorerView::getMSD(MatchStartData myMSD){
+    myM.currentScore[0] = myMSD.gameStartScore;
+    myM.currentScore[1] = myMSD.gameStartScore;
+    myM.startScore = myMSD.gameStartScore;
+    myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
 }
