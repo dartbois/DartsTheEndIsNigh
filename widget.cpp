@@ -26,7 +26,8 @@ Widget::Widget(QWidget *parent)
     chart->setAnimationOptions(QChart::AllAnimations);
     QString scoreString = "Score:           ";
     scoreDisplayer = new QLabel(scoreString, chartView);
-    Widget::scoreDisplayer->setVisible(true);
+    Widget::scoreDisplayer->setVisible(false);
+    validateState = true;
     //! [1]
 
     //
@@ -267,28 +268,32 @@ Widget::~Widget()
 void Widget::addScore()
 {
     QPieSlice *slice = qobject_cast<QPieSlice *>(sender());
-    this->score = slice->label().toInt();
-    slice->setLabelVisible(true);
+
     Widget::scoreDisplayer->clear();
 //    QString scoreString = "Score: ";
 //    scoreString.append(QString::number(this->score));
 //    Widget::scoreDisplayer->setText(scoreString);
-    dartNumber++;
-    if(dartNumber == 1)
+    if(validateState == true)
     {
-        emit scoreSignalOne(score);
-    }
-    if(dartNumber == 2)
-    {
-        emit scoreSignalTwo(score);
-    }
-    if(dartNumber == 3)
-    {
-        emit scoreSignalThree(score);
-        dartNumber = -1;
-        emit needsValidation(true);
+        this->score = slice->label().toInt();
+        slice->setLabelVisible(true);
+        dartNumber++;
+        if(dartNumber == 1)
+        {
+            emit scoreSignalOne(score);
+        }
+        if(dartNumber == 2)
+        {
+            emit scoreSignalTwo(score);
+        }
+        if(dartNumber == 3)
+        {
+            emit scoreSignalThree(score);
+            dartNumber = 0;
+            emit needsValidation(true);
         }
     }
+}
 void Widget::validationBlocker(bool blockForValidation)
 {
     if (blockForValidation == true)
@@ -296,11 +301,13 @@ void Widget::validationBlocker(bool blockForValidation)
         disconnect(this, SIGNAL(scoreSignalOne(int)), theParent, SLOT(set_SlingOneText(int)));
         disconnect(this, SIGNAL(scoreSignalTwo(int)), theParent, SLOT(set_SlingTwoText(int)));
         disconnect(this, SIGNAL(scoreSignalThree(int)), theParent, SLOT(set_SlingThreeText(int)));
+        validateState = false;
     }
     if (blockForValidation == false)
     {
         connect(this, SIGNAL(scoreSignalOne(int)), theParent, SLOT(set_SlingOneText(int)));
         connect(this, SIGNAL(scoreSignalTwo(int)), theParent, SLOT(set_SlingTwoText(int)));
         connect(this, SIGNAL(scoreSignalThree(int)), theParent, SLOT(set_SlingThreeText(int)));
+        validateState = true;
     }
 }

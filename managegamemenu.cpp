@@ -54,7 +54,7 @@ void ManageGameMenu::on_GameMenuEdit_clicked()
 
 void ManageGameMenu::on_GameMenuRemove_clicked()
 {
-    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+    if (ui->listWidget->currentRow() != 0){
         DataHandler myD;
 
         QString currentItem = ui->listWidget->currentItem()->text();

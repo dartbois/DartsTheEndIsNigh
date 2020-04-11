@@ -16,6 +16,7 @@ public:
     ~Widget();
     int score = 0;
     int dartNumber;
+    bool validateState;
 public slots:
     void addScore();
 

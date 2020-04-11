@@ -55,7 +55,7 @@ void ManagePlayerMenu::on_PlayerMenuEdit_clicked()
 void ManagePlayerMenu::on_PlayerMenuRemove_clicked()
 {
     //Row 0 is the header and cannot be removed.
-   if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+   if (ui->listWidget->currentRow() != 0){
        DataHandler myD;
 
        QString currentItem = ui->listWidget->currentItem()->text();

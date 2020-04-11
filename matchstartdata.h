@@ -7,8 +7,6 @@ using namespace std;
 class MatchStartData
 {
 public:
-    MatchStartData();
-    void postInit(int matchID);
     MatchStartData(int matchID);
     string gameName;
     string gameDate;
@@ -16,7 +14,7 @@ public:
     int gameStartScore;
     int gameLegs;
     int gameMatches;
-    int gamePs[2];
+    string gamePs[2];
     string dataGet(string request);
 
 };
