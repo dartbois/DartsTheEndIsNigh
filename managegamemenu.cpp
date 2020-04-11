@@ -12,6 +12,9 @@ ManageGameMenu::ManageGameMenu(QWidget *parent) :
     FillGameList();
     gameAddEditMenu = new GameAddEditMenu();
 
+    //experimental
+    connect(gameAddEditMenu, SIGNAL(refreshGList()), this, SLOT(refreshGameAdded()));
+
 }
 
 ManageGameMenu::~ManageGameMenu()
@@ -71,4 +74,8 @@ void ManageGameMenu::on_GameMenuRemove_clicked()
             FillGameList();
         }
     }
+}
+
+void ManageGameMenu::refreshGameAdded(){
+    FillGameList();
 }

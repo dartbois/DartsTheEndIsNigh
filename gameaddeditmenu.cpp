@@ -30,7 +30,7 @@ void GameAddEditMenu::on_pushButton_clicked()
     sqlHandler mySql(path);
 
     mySql.sqlAddNewGame(GID, newGame);
-
+    emit refreshGList();
     this->hide();
 }
 
