@@ -176,7 +176,7 @@ void ScorerView::set_SlingThreeText(int score)
 
 void ScorerView::on_ValadationYes_clicked()
 {
-    bool validation = false;
+    /*bool validation = false;
     int playerceholder;
     int valHold = SlingOneText->text().toInt();
     int totalThrow;
@@ -208,15 +208,16 @@ void ScorerView::on_ValadationYes_clicked()
             }
         }
     }
-    myM.scoreSubtract(playerceholder, totalThrow); //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
+    myM.scoreSubtract(playerceholder, totalThrow);*/ //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
     //Database accept code goes here
+
     emit sendValidateTrue(false);    //sending false will unblock the scoring
 }
 
 void ScorerView::on_ValadationNo_clicked()
 {
     //Database reject code goes here
-    SlingOneText->setVisible(false);
+    //SlingOneText->setVisible(false);
     qDebug() << "This is validationNo button";
 }
 
