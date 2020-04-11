@@ -58,15 +58,17 @@ void ManageGameMenu::on_GameMenuRemove_clicked()
         DataHandler myD;
 
         QString currentItem = ui->listWidget->currentItem()->text();
-        QStringList currentItemList = currentItem.split("\t");
-        currentItem = currentItemList[0];
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            currentItem = currentItemList[0];
 
-        string currentItemID = currentItem.toStdString();
+            string currentItemID = currentItem.toStdString();
 
-        string req = currentItemID + ":removeGame";
+            string req = currentItemID + ":removeGame";
 
-        myD.sqlGet(req);
+            myD.sqlGet(req);
 
-        FillGameList();
+            FillGameList();
+        }
     }
 }

@@ -210,6 +210,7 @@ void ScorerView::on_ValadationYes_clicked()
     }
     myM.scoreSubtract(playerceholder, totalThrow);*/ //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
     //Database accept code goes here
+    qDebug() << "slorp";
 
     emit sendValidateTrue(false);    //sending false will unblock the scoring
 }
