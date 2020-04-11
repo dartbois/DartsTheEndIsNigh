@@ -25,8 +25,6 @@ private slots:
 
     void on_GameMenuRemove_clicked();
 
-    void refreshGameAdded();
-
 private:
     Ui::ManageGameMenu *ui;
     GameAddEditMenu* gameAddEditMenu;
