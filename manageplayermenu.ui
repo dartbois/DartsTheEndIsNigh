@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
+    <width>660</width>
     <height>534</height>
    </rect>
   </property>
@@ -22,6 +22,12 @@
    </item>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
+     <property name="maximumSize">
+      <size>
+       <width>220</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -30,27 +36,6 @@
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="1">
-       <widget class="QPushButton" name="PlayerMenuAdd">
-        <property name="text">
-         <string>Add</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="PlayerMenuRemove">
-        <property name="text">
-         <string>Remove</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="PlayerMenuEdit">
-        <property name="text">
-         <string>Edit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
        <widget class="QDialogButtonBox" name="buttonBox">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -60,8 +45,35 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="4" column="1">
+       <widget class="QPushButton" name="PlayerMenuRemove">
+        <property name="text">
+         <string>Remove</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="PlayerMenuEdit">
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="PlayerMenuAdd">
+        <property name="text">
+         <string>Add</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
        <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>100</height>
+         </size>
+        </property>
         <property name="sizeIncrement">
          <size>
           <width>5</width>
