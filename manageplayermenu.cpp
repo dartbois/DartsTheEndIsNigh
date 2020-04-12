@@ -11,9 +11,6 @@ ManagePlayerMenu::ManagePlayerMenu(QWidget *parent) :
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     FillPlayerList();
     playerAddEditMenu = new PlayerAddEditMenu();
-
-    //experimental
-    connect(playerAddEditMenu, SIGNAL(refreshList()), this, SLOT(refreshPlayerAdded()));
 }
 
 ManagePlayerMenu::~ManagePlayerMenu()
@@ -58,26 +55,19 @@ void ManagePlayerMenu::on_PlayerMenuEdit_clicked()
 void ManagePlayerMenu::on_PlayerMenuRemove_clicked()
 {
     //Row 0 is the header and cannot be removed.
-   if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+   if (ui->listWidget->currentRow() != 0){
        DataHandler myD;
 
        QString currentItem = ui->listWidget->currentItem()->text();
-       if (QString::compare(currentItem, "") != 0){
-           QStringList currentItemList = currentItem.split("\t");
-           currentItem = currentItemList[0];
+       QStringList currentItemList = currentItem.split("\t");
+       currentItem = currentItemList[0];
 
-           string currentItemID = currentItem.toStdString();
+       string currentItemID = currentItem.toStdString();
 
-           string req = currentItemID + ":removePlayer";
+       string req = currentItemID + ":removePlayer";
 
-           myD.sqlGet(req);
+       myD.sqlGet(req);
 
-           FillPlayerList();
-       }
+       FillPlayerList();
    }
 }
-
-void ManagePlayerMenu::refreshPlayerAdded(){
-    FillPlayerList();
-}
-
