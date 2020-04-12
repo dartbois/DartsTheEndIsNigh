@@ -16,6 +16,7 @@ class AudienceView;
 class AudienceView : public QDialog
 {
     Q_OBJECT
+
 public:
     explicit AudienceView(QWidget *parent = nullptr);
     ~AudienceView();
@@ -36,6 +37,7 @@ public slots:
     void setPersonalStatsText();
     void setMatchStatsText();
     void setRankedStatsText();
+    void setLatestThrowText(QString *latestThrow);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
@@ -47,9 +49,8 @@ public slots:
     void undoWinPercentagesText();
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
-
 public:
-    //initializes the UI
+   //initializes the UI
    Ui::AudienceView *ui;
    //set of labels controlling stats displays in the UI
    QLabel *StatisticsDisplay;

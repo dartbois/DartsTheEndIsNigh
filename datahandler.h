@@ -21,18 +21,16 @@ class DataHandler
 public:
     //initialization
     DataHandler();
-
     //deprecated versions of current functions
     /*
     string getData(string request);
     string setData(string request);
     */
-
     //one function for each class that needs to 'talk'
-    string sqlGet(string request); //for sqlHandler
-    string mathcGet(string request, mathClass myM); //for mathClass
-    string matchstartGet(string request, MatchStartData myS); //for MatchStartData
-    string playerGet(string request, player myP); //for player
+    string sqlGet(string request);
+    string mathcGet(string request, mathClass myM);
+    string matchstartGet(string request, MatchStartData myS);
+    string playerGet(string request, player myP);
 };
 
 #endif // DATAHANDLER_H

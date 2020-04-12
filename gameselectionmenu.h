@@ -19,7 +19,6 @@ class GameSelectionMenu : public QDialog
 {
     Q_OBJECT
 
-
 public:
     //Populates the list from which you select a game
     void FillGameList();
@@ -28,11 +27,9 @@ public:
     explicit GameSelectionMenu(QWidget *parent = nullptr);
     ~GameSelectionMenu();
 
-
 signals:
     //sends the information on the game in question to the Scorerview
     void sendScorerViewMSD(MatchStartData myMSD);
-
 
 private slots:
     //Function reacting to the player interacting with the UI
@@ -43,7 +40,7 @@ private:
     Ui::GameSelectionMenu *ui;
     AudienceView* audienceWindow;
     ScorerView* scorerWindow;
-
+    //void sendScorerViewMSD(int startVal);
 public:
     //holds info about the game
     MatchStartData myMSD;

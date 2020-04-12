@@ -13,14 +13,13 @@ public:
     //Constructors
     mathClass(int scoreStart);
     mathClass();
-
     string winnerCalc(); //calculates the match winner
     string winThrowCalc(int player); //calculates the winning throws
     void scoreSubtract(int player, int throwScore); //subtracts score from total, player is 0 or 1
     string dataGet(string request); //Facilitates data transmission
-    bool scoreValidator(int remScore); //validates scores
+    bool scoreValidator(int remScore);
     int currentScore[2]; //current score
-    int startScore; //holds the starting score for the match
+    int startScore;
 private:
 
     //every winning throw in string form in an array

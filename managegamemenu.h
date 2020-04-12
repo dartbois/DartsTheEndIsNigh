@@ -11,7 +11,6 @@
 //It is instantiated by ManageChoiceMenu.
 //It instantiates GameAddEditMenu.
 
-
 namespace Ui {
 class ManageGameMenu;
 }
@@ -28,7 +27,7 @@ public:
     ~ManageGameMenu();
 
 private slots:
-    //Functions that respond when the user interacts with the UI.
+     //Functions that respond when the user interacts with the UI.
     void on_GameMenuAdd_clicked();
 
     void on_GameMenuEdit_clicked();

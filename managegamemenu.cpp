@@ -43,6 +43,8 @@ void ManageGameMenu::FillGameList(){
 
     //Add list to listWidget
     ui->listWidget->addItems(gameInfoList);
+
+    ui->listWidget->setCurrentRow(0);
 }
 
 void ManageGameMenu::on_GameMenuAdd_clicked()
@@ -52,7 +54,18 @@ void ManageGameMenu::on_GameMenuAdd_clicked()
 
 void ManageGameMenu::on_GameMenuEdit_clicked()
 {
-    gameAddEditMenu -> show();
+    int gotGID;
+    if (ui->listWidget->currentRow() != 0){
+        QString currentItem = ui->listWidget->currentItem()->text();
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            gotGID = currentItemList[0].toInt();
+
+            gameAddEditMenu->oGID = gotGID;
+            gameAddEditMenu -> show();
+        }
+    }
+
 }
 
 void ManageGameMenu::on_GameMenuRemove_clicked()

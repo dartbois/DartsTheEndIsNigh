@@ -20,11 +20,14 @@ public:
     //facilitates instantiating a new game
     MatchStartData initNewGame();
     //constructor/deconstructor
+    int oGID;
     explicit GameAddEditMenu(QWidget *parent = nullptr);
     ~GameAddEditMenu();
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 signals:
     void refreshGList();
