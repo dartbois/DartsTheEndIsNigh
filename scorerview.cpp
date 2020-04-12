@@ -4,7 +4,6 @@
 #include <String>
 #include <QDebug>
 
-
 ScorerView::ScorerView(AudienceView *audienceWindow) :
     //QDialog(parent),
     ui(new Ui::ScorerView)
@@ -13,10 +12,13 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     this->setWindowTitle("Scorer Window");
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     QString scoreString = "                                 ";
+    currentThrow = new QString(scoreString);
+    lastThrow = new QString(scoreString);
     SlingOneText = ui->SlingOne;
     SlingTwoText = ui ->SlingTwo;
     SlingThreeText = ui->SlineThree;
-
+    currentThrowLabel = ui->CurrentThrowLabel;
+    lastThrowLabel = ui->LastThrowLabel;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
@@ -28,7 +30,7 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendPersonalStats, audienceWindow, &AudienceView::setPersonalStatsText);
    connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
    connect(this, &ScorerView::sendRankedStats, audienceWindow, &AudienceView::setRankedStatsText);
-
+   connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
 
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
@@ -162,57 +164,43 @@ void ScorerView::on_RankedStats_clicked()
 void ScorerView::set_SlingOneText(int score)
 {
     SlingOneText -> setText(QString::number(score));
+    currentThrow->clear();
+    currentThrow->append(SlingOneText->text());
+    currentThrowLabel->setText(*currentThrow);
 }
 
 void ScorerView::set_SlingTwoText(int score)
 {
     SlingTwoText -> setText(QString::number(score));
+    currentThrow->append('\t');
+    currentThrow->append(SlingTwoText->text());
+    currentThrowLabel->setText(*currentThrow);
 }
 
 void ScorerView::set_SlingThreeText(int score)
 {
     SlingThreeText -> setText(QString::number(score));
+    currentThrow->append('\t');
+    currentThrow->append(SlingThreeText->text());
+    currentThrowLabel->setText(*currentThrow);
 }
 
 void ScorerView::on_ValadationYes_clicked()
 {
-    /*bool validation = false;
-    int playerceholder;
-    int valHold = SlingOneText->text().toInt();
-    int totalThrow;
-    bool check;
-    while(validation == false){
-        totalThrow = 0;
-        check = myM.scoreValidator(valHold);
-        if (check == false){
-            //say score is bad
-        }
-        else {
-            totalThrow = valHold;
-            valHold = SlingTwoText->text().toInt();
-            check = myM.scoreValidator(valHold);
-            if (check == false){
-                //say score is bad
-            }
-            else {
-                totalThrow += valHold;
-                valHold = SlingThreeText->text().toInt();
-                check = myM.scoreValidator(valHold);
-                if (check == false) {
-                    //say score is bad
-                }
-                else {
-
-                   validation = true;
-                }
-            }
-        }
-    }
-    myM.scoreSubtract(playerceholder, totalThrow);*/ //MAKE SURE PLAYERCEHOLDER OR WHATEVER HAS THE ACTIVE PLAYER.
     //Database accept code goes here
-    qDebug() << "slorp";
-
     emit sendValidateTrue(false);    //sending false will unblock the scoring
+    //Show the validated throw on the current throw
+    lastThrow->clear();
+    lastThrow->append(SlingOneText->text());
+    lastThrow->append('\t');
+    lastThrow->append(SlingTwoText->text());
+    lastThrow->append('\t');
+    lastThrow->append(SlingThreeText->text());
+    lastThrowLabel->setText(*lastThrow);
+    lastThrowLabel->show();
+    emit sendLatestThrow(lastThrow);
+    currentThrowLabel->clear();
+    currentThrow->clear();
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -221,7 +209,8 @@ void ScorerView::on_ValadationNo_clicked()
     SlingOneText->clear();
     SlingTwoText->clear();
     SlingThreeText->clear();
-    emit sendValidateTrue(false);    //sending false will unblock the scoring
+    currentThrowLabel->clear();
+    currentThrow->clear();
 }
 
 void ScorerView::on_SlingOne_linkActivated(const QString &link)
@@ -239,7 +228,3 @@ void ScorerView::on_SlineThree_linkActivated(const QString &link)
 
 }
 
-void ScorerView::getMSD(int startVal){
-    myM.currentScore[0] = startVal;
-    myM.currentScore[1] = startVal;
-}

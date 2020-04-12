@@ -13,7 +13,7 @@ class ManagePlayerMenu : public QDialog
     Q_OBJECT
 
 public:
-    void FillPlayerList(); 
+    void FillPlayerList();
     explicit ManagePlayerMenu(QWidget *parent = nullptr);
     ~ManagePlayerMenu();
 
@@ -23,8 +23,6 @@ private slots:
     void on_PlayerMenuEdit_clicked();
 
     void on_PlayerMenuRemove_clicked();
-
-    void refreshPlayerAdded();
 
 private:
     Ui::ManagePlayerMenu *ui;

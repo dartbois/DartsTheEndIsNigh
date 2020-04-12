@@ -18,10 +18,8 @@ public:
     int dartNumber;
     bool validateState;
 public slots:
-    //This will be called every time that a pie slice has been clicked
     void addScore();
 
-    //This will block the user from using the dartboard until the score has been validated or rejected
     void validationBlocker(bool blockForValidation);
 
  signals:
@@ -33,6 +31,7 @@ public slots:
 
 private:
     QList<QPieSeries *> m_donuts;
+
     QWidget* theParent;
     QLabel *scoreDisplayer;
 };

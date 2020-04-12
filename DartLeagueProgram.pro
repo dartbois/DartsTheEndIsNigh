@@ -21,7 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 SOURCES += \
-datahandler.cpp \
+    datahandler.cpp \
     gameaddeditmenu.cpp \
     main.cpp \
     managechoicemenu.cpp \

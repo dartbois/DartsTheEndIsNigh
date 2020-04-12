@@ -3,7 +3,6 @@
 
 #include <QtWidgets/QDialog>
 #include "audienceview.h"
-#include "mathclass.h"
 #include <QLabel>
 
 namespace Ui {
@@ -17,6 +16,8 @@ class ScorerView : public QDialog
 public:
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
+    int legNumber;
+    int matchNumber;
 
 public slots:
     void on_PlayerOneStats_clicked();
@@ -43,7 +44,6 @@ public slots:
 
     void set_SlingThreeText(int score);
 
-    void getMSD(int startVal);
 signals:
 
     //These signals will show the stats in the audience window
@@ -87,6 +87,9 @@ signals:
     //These signals will be used for validation of the scores
     void sendValidateTrue(bool unblockScore);
 
+    //These signals will be used to send the latest throw string to Audience View
+    void sendLatestThrow(QString *latestThrow);
+
 public:
     Ui::ScorerView *ui;
     QLabel *StatisticsDisplay;
@@ -101,7 +104,10 @@ public:
     QLabel *SlingOneText;
     QLabel *SlingTwoText;
     QLabel *SlingThreeText;
-
+    QLabel *currentThrowLabel;
+    QLabel *lastThrowLabel;
+    QString *currentThrow;
+    QString *lastThrow;
 
 private slots:
     void on_ValadationYes_clicked();
@@ -109,11 +115,6 @@ private slots:
     void on_SlingOne_linkActivated(const QString &link);
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
-
-public:
-    mathClass myM;
-
-    int beginScore;
 };
 
 #endif // SCORERVIEW_H

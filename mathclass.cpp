@@ -5,12 +5,8 @@
 mathClass::mathClass(int scoreStart)
 {
     currentScore[0] = scoreStart, currentScore[1] = scoreStart;
-
 };
 
-mathClass::mathClass(){
-
-}
 
 string mathClass::winnerCalc(){
     string winner;
@@ -64,11 +60,13 @@ string mathClass::winThrowCalc(int player){
     int i = 0; //iterator
     bool solFinder = false, valChecker = false, failFind = false; //has a solution been found?
     char doubTrip = NULL;
+
     //logic to find the largest possible remaining double
     if (score > 170)
     {
         failFind = true;
     }
+
     if (score > 50)
         largestDouble = 50;
         else if (score <= 40) {
@@ -86,6 +84,7 @@ string mathClass::winThrowCalc(int player){
    if (largestDouble == 0) {
             failFind = true;
    }
+
    //logic to find the largest possible score past the double
    remScore = score - largestDouble;
    if (failFind == false && solFinder == false) {
@@ -103,6 +102,7 @@ string mathClass::winThrowCalc(int player){
                remScore = remScore - largestScore2;
            }
         }
+
     if (failFind == true) {
         winThrow = "N/A";
     }
@@ -122,6 +122,7 @@ string mathClass::winThrowCalc(int player){
         else
             doubTrip = 'S';
         winThrow = doubTrip + to_string(printScore) + winThrow;
+
         if (remScore != 0){
             if (remScore%2 == 0) {
                 doubTrip = 'D';
@@ -148,8 +149,8 @@ void mathClass::scoreSubtract(int player, int throwScore){
 
 
 bool mathClass::scoreValidator(int remScore) {
-    bool check;
-    check = (1 <= remScore && remScore <= 20) || (1 <= remScore/3 && remScore/3 <= 20 && remScore%3 == 0) || (1 <= remScore/2 && remScore/2 <= 20 && remScore%2 == 0) || (remScore == 25) || (remScore == 50);
+    bool check = (remScore <= 20 || remScore == 25 || remScore == 50 || (remScore <= 60 && (remScore%2 == 0 || remScore%3 == 0)));
+
     return check;
 };
 

@@ -277,6 +277,7 @@ void Widget::addScore()
     {
         this->score = slice->label().toInt();
         slice->setLabelVisible(true);
+        slice->setLabelPosition(slice->LabelInsideHorizontal);
         dartNumber++;
         if(dartNumber == 1)
         {

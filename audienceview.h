@@ -32,6 +32,7 @@ public slots:
     void setPersonalStatsText();
     void setMatchStatsText();
     void setRankedStatsText();
+    void setLatestThrowText(QString *latestThrow);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
