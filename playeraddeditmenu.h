@@ -15,11 +15,14 @@ class PlayerAddEditMenu : public QDialog
 
 public:
     player initNewPlayer();
+    int oPID;
     explicit PlayerAddEditMenu(QWidget *parent = nullptr);
     ~PlayerAddEditMenu();
 
 private slots:
     void on_AddPlayerInfo_clicked();
+
+    void on_EditPlayerInfo_clicked();
 
 signals:
     void refreshList();

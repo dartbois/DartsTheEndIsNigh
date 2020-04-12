@@ -25,6 +25,12 @@ sqlHandler::sqlHandler(const QString& path) {
        printf("dartdb failed to open");
     }
 
+    //Create tables if they do not exist
+    QSqlQuery query;
+    query.prepare("CREATE TABLE [IF NOT EXISTS] Games ([Game ID] INTEGER UNIQUE NOT NULL, [Game Name] NOT NULL UNIQUE, Date DATE NOT NULL, Location STRING NOT NULL, [Start Score] INTEGER NOT NULL, [Max # Matches] INTEGER NOT NULL, [Max # Legs] INTEGER NOT NULL, Player1 INTEGER NOT NULL, Player2 INTEGER NOT NULL, Winner INTEGER NOT NULL, P1Slings STRING, P2Slings STRING, Completed BOOLEAN DEFAULT (FALSE));");
+    query.exec();
+    query.prepare("CREATE TABLE [IF NOT EXISTS] players ([Player ID] INTEGER NOT NULL, [First Name] STRING NOT NULL, [Last Name] STRING NOT NULL, Hometown STRING NOT NULL, Ranking INTEGER, [Avg 180s] REAL, [Avg 180s (Season)] REAL, [Last Game Win] INTEGER, [Avg Throw Score] REAL, [Avg Throw Score (Season)] REAL, [Turn Score High] INTEGER, [Turn Score Low] INTEGER, [Num Games Played] INTEGER NOT NULL, [Num Games Won] INTEGER NOT NULL);");
+    query.exec();
 }
 
 void sqlHandler::sqlCloseConnection(){
@@ -337,7 +343,7 @@ void sqlHandler::sqlSetPlayerFinal(int playerID, player Player) {
 }
 
 //Setter: needs to update game db stats after game is complete
-void sqlHandler::sqlSetGameFinal(int gameID){
+void sqlHandler::sqlSetGameFinal(int gameID, MatchStartData game){
 
 }
 
@@ -390,6 +396,50 @@ void sqlHandler::sqlAddNewPlayer(int playerID, player Player){
 
 }
 
+//Setter: will update a player in the SQLite db
+void sqlHandler::sqlUpdatePlayer(int playerID, int newPID, player Player){
+    QSqlQuery query;
+
+    QString Qfirst, Qlast, Qhome;
+    int rank, lastwin, tshi, tslo, played, won;
+    float a180, a180s, athrow, athrows;
+
+    Qfirst = QString::fromStdString(Player.playerFirst[0]);
+    Qlast = QString::fromStdString(Player.playerLast[0]);
+    Qhome = QString::fromStdString(Player.playerHometown[0]);
+    rank = Player.playerRanking[0];
+    a180 = Player.playerAvg180s[0];
+    a180s = Player.playerAvg180Season[0];
+    lastwin = Player.playerLastWin[0];
+    athrow = Player.playerAvgThrow[0];
+    athrows = Player.playerAvg180Season[0];
+    tshi = Player.playerTurnScoreHi[0];
+    tslo = Player.playerTurnScoreLo[0];
+    played = Player.playerGamesPlayed[0];
+    won = Player.playerGamesWon[0];
+
+    query.prepare("UPDATE players SET [Player ID] = ?, [First Name] = ?, [Last Name] = ?, Hometown = ?, Ranking = ?, [Avg 180s] = ?, [Avg 180s (Season)] = ?, [Last Game Win] = ?, [Avg Throw Score] = ?, [Avg Throw Score (Season)] = ?, [Turn Score High] = ?, [Turn Score Low] = ?, [Num Games Played] = ?, [Num Games Won] = ? WHERE [Player ID] = ?");
+    query.bindValue(0, newPID);
+    query.bindValue(1, Qfirst);
+    query.bindValue(2, Qlast);
+    query.bindValue(3, Qhome);
+    query.bindValue(4, rank);
+    query.bindValue(5, a180);
+    query.bindValue(6, a180s);
+    query.bindValue(7, lastwin);
+    query.bindValue(8, athrow);
+    query.bindValue(9, athrows);
+    query.bindValue(10, tshi);
+    query.bindValue(11, tslo);
+    query.bindValue(12, played);
+    query.bindValue(13, won);
+    query.bindValue(14, playerID);
+
+    query.exec();
+    query.first();
+
+}
+
 //Setter: needs to remove a player from the SQLite db
 void sqlHandler::sqlRemovePlayer(int playerID){
     QSqlQuery query;
@@ -435,6 +485,11 @@ void sqlHandler::sqlAddNewGame(int gameID, MatchStartData newGame){
 
     query.exec();
     qDebug()<<query.exec()<<endl;
+}
+
+//Setter: will update a game in the SQLite db
+void sqlHandler::sqlUpdateGame(int gameID, MatchStartData game){
+
 }
 
 //Setter: needs to remove a game from the SQLite db

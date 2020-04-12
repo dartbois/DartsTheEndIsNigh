@@ -52,7 +52,18 @@ void ManagePlayerMenu::on_PlayerMenuAdd_clicked()
 
 void ManagePlayerMenu::on_PlayerMenuEdit_clicked()
 {
-     playerAddEditMenu -> show();
+    int gotPID;
+    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+        QString currentItem = ui->listWidget->currentItem()->text();
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            currentItem = currentItemList[0];
+            gotPID = currentItem.toInt();
+
+            playerAddEditMenu->oPID = gotPID;
+            playerAddEditMenu -> show();
+        }
+    }
 }
 
 void ManagePlayerMenu::on_PlayerMenuRemove_clicked()

@@ -35,6 +35,22 @@ void PlayerAddEditMenu::on_AddPlayerInfo_clicked()
     this->hide();
 }
 
+void PlayerAddEditMenu::on_EditPlayerInfo_clicked()
+{
+    player uPlayer = initNewPlayer();
+
+    QString QPID = ui->PlayerIDAddEdit->text();
+    int newPID = QPID.toInt();
+
+    QString path = QDir::currentPath();
+    path = path + QString("/DartLeague.db");
+    sqlHandler mySql(path);
+
+    mySql.sqlUpdatePlayer(oPID, newPID, uPlayer);
+    emit refreshList();
+    this->hide();
+}
+
 player PlayerAddEditMenu::initNewPlayer(){
     player newPlayer(0,0);
 
