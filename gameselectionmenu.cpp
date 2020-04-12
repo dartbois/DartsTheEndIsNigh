@@ -13,6 +13,7 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
     connect(this, SIGNAL(sendScorerViewMSD(MatchStartData)), scorerWindow, SLOT(getMSD(MatchStartData)));
+    connect(this, SIGNAL(sendAudienceViewMSD(MatchStartData)), audienceWindow, SLOT(getMSD(MatchStartData)));
 }
 
 GameSelectionMenu::~GameSelectionMenu()
@@ -38,7 +39,8 @@ void GameSelectionMenu::on_pushButton_clicked()
     this->hide();
 }
 
-void GameSelectionMenu::FillGameList(){
+void GameSelectionMenu::FillGameList()
+{
     //Instance of datahandler
     DataHandler myD;
 
@@ -61,9 +63,4 @@ void GameSelectionMenu::FillGameList(){
     ui->listWidget->addItems(gameInfoList);
 }
 
-/*
-void GameSelectionMenu::sendScorerViewMSD(int startVal){
-    //i'm tryin'
-    return;
-}
-*/
+
