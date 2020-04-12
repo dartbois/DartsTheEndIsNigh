@@ -47,6 +47,8 @@ public slots:
 
     void getMSD(MatchStartData myMSD);
 
+
+
 signals:
 
     //These signals will show the stats in the audience window
@@ -90,6 +92,11 @@ signals:
     //These signals will be used for validation of the scores
     void sendValidateTrue(bool unblockScore);
 
+    void sendActivePlayer(player Activeplayer);
+
+
+
+
 public:
     Ui::ScorerView *ui;
     QLabel *StatisticsDisplay;
@@ -104,6 +111,8 @@ public:
     QLabel *SlingOneText;
     QLabel *SlingTwoText;
     QLabel *SlingThreeText;
+    player *ActivePlayer;
+
 
 
 private slots:
@@ -117,6 +126,7 @@ public:
     mathClass myM;
     int beginScore;
     player myP;
+
 };
 
 #endif // SCORERVIEW_H

@@ -1,6 +1,8 @@
 #ifndef AUDIENCEVIEW_H
 #define AUDIENCEVIEW_H
 
+#include "gameselectionmenu.h"
+#include "player.h"
 #include <QDialog>
 #include <QLabel>
 
@@ -43,6 +45,10 @@ public slots:
     void undoWinPercentagesText();
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
+    void getMSD(MatchStartData myMSD);
+    void getActivePlayer(player ActivePlayer);
+
+
 public:
    Ui::AudienceView *ui;
    QLabel *StatisticsDisplay;
@@ -65,6 +71,12 @@ private slots:
    void on_PersonalStats_linkActivated(const QString &link);
    void on_MatchStats_linkActivated(const QString &link);
    void on_RankedStats_linkActivated(const QString &link);
+
+public:
+    mathClass myM;
+    int beginScore;
+    player myP;
+
 };
 
 #endif // AUDIENCEVIEW_H

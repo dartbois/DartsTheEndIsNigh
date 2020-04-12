@@ -22,6 +22,7 @@ public:
 
 signals:
     void sendScorerViewMSD(MatchStartData myMSD);
+    void sendAudienceViewMSD(MatchStartData MyMSD);
 
 private slots:
     void on_pushButton_clicked();  
@@ -30,7 +31,7 @@ private:
     Ui::GameSelectionMenu *ui;
     AudienceView* audienceWindow;
     ScorerView* scorerWindow;
-    //void sendScorerViewMSD(int startVal);
+
     public:
         MatchStartData myMSD;
 };
