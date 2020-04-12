@@ -488,7 +488,35 @@ void sqlHandler::sqlAddNewGame(int gameID, MatchStartData newGame){
 }
 
 //Setter: will update a game in the SQLite db
-void sqlHandler::sqlUpdateGame(int gameID, MatchStartData game){
+void sqlHandler::sqlUpdateGame(int gameID, int newGID, MatchStartData game){
+    QSqlQuery query;
+
+    QString Qname, Qdate, QLoc;
+    int start, matches, legs, p1, p2;
+
+    Qname = QString::fromStdString(game.gameName);
+    Qdate = QString::fromStdString(game.gameDate);
+    QLoc = QString::fromStdString(game.gameLocation);
+    start = game.gameStartScore;
+    matches = game.gameMatches;
+    legs = game.gameLegs;
+    p1 = game.gamePs[0];
+    p2 = game.gamePs[1];
+
+    query.prepare("UPDATE Games SET [Game ID] = ?, [Game Name] = ?, Date = ?, Location = ?, [Start Score] = ?, [Max # Matches] = ?, [Max # Legs] = ?, Player1 = ?, Player2 = ?, WHERE [Game ID] = ?");
+    query.bindValue(0, newGID);
+    query.bindValue(1, Qname);
+    query.bindValue(2, Qdate);
+    query.bindValue(3, QLoc);
+    query.bindValue(4, start);
+    query.bindValue(5, matches);
+    query.bindValue(6, legs);
+    query.bindValue(7, p1);
+    query.bindValue(8, p2);
+    query.bindValue(9, gameID);
+
+    query.exec();
+    query.first();
 
 }
 

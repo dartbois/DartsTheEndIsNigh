@@ -43,6 +43,8 @@ void ManagePlayerMenu::FillPlayerList(){
     //Add list to listWidget
     ui->listWidget->addItems(playerInfoList);
 
+    ui->listWidget->setCurrentRow(0);
+
 }
 
 void ManagePlayerMenu::on_PlayerMenuAdd_clicked()

@@ -47,7 +47,7 @@ public:
     void sqlUpdatePlayer(int playerID, int newPID, player Player);
     void sqlRemovePlayer(int playerID);
     void sqlAddNewGame(int gameID, MatchStartData newGame);
-    void sqlUpdateGame(int gameID, MatchStartData game);
+    void sqlUpdateGame(int gameID, int newGID, MatchStartData game);
     void sqlRemoveGame(int gameID);
 
 private:

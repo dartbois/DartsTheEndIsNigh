@@ -34,6 +34,22 @@ void GameAddEditMenu::on_pushButton_clicked()
     this->hide();
 }
 
+void GameAddEditMenu::on_pushButton_2_clicked()
+{
+    MatchStartData uGame = initNewGame();
+
+    QString QGID = ui->GameIDAddEdit->text();
+    int newGID = QGID.toInt();
+
+    QString path = QDir::currentPath();
+    path = path + QString("/DartLeague.db");
+    sqlHandler mySql(path);
+
+    mySql.sqlUpdateGame(oGID, newGID, uGame);
+    emit refreshGList();
+    this->hide();
+}
+
 MatchStartData GameAddEditMenu::initNewGame(){
     MatchStartData newGame(0);
 
