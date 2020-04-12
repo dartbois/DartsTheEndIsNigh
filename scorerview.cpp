@@ -16,7 +16,6 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     SlingOneText = ui->SlingOne;
     SlingTwoText = ui ->SlingTwo;
     SlingThreeText = ui->SlineThree;
-    ActivePlayer = new player();
 
 
     //connect the show stats signals to the audience window slots
@@ -41,8 +40,6 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
    connect(this, &ScorerView::sendPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoPlayerTwoStatsText);
-
-   connect(this, &ScorerView::sendActivePlayer,audienceWindow,&AudienceView::getActivePlayer);
 
 
 
