@@ -8,6 +8,12 @@
 #include "matchstartdata.h"
 #include "player.h"
 
+//this is a UI class
+//This class controls the window the scorer would see.
+//--This includes various statistics option selections.
+//It hosts the dartboard (which is 'widget') and score verification.
+//It is instantiated in GameSelectionMenu and interacts often with AudienceView.
+
 namespace Ui {
 class ScorerView;
 }
@@ -17,10 +23,12 @@ class ScorerView : public QDialog
     Q_OBJECT
 
 public:
+    //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
 
 public slots:
+    //these react to the user interacting with the UI.
     void on_PlayerOneStats_clicked();
 
     void on_PlayerTwoStats_clicked();
@@ -45,6 +53,7 @@ public slots:
 
     void set_SlingThreeText(int score);
 
+    //gets a MatchStartData from GameSelectionMenu.
     void getMSD(MatchStartData myMSD);
 
 signals:
@@ -91,6 +100,7 @@ signals:
     void sendValidateTrue(bool unblockScore);
 
 public:
+    //various UI elements
     Ui::ScorerView *ui;
     QLabel *StatisticsDisplay;
     QLabel *Player2Stats;

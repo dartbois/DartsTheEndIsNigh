@@ -4,6 +4,8 @@
 #include <QString>
 using namespace std;
 
+//This is a backend class.
+//This class holds all variables for both players in a match.
 
 class player
 {
