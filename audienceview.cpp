@@ -248,3 +248,7 @@ void AudienceView::undoPlayerOneStatsText()
 {
     ui->StatisticsDisplay->clear();
 }
+void AudienceView::setLatestThrowText(QString *latestThrow)
+{
+    ui->PlayerOneLastThrowLabel->setText(*latestThrow);
+}

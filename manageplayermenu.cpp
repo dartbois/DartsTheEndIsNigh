@@ -55,7 +55,7 @@ void ManagePlayerMenu::on_PlayerMenuAdd_clicked()
 void ManagePlayerMenu::on_PlayerMenuEdit_clicked()
 {
     int gotPID;
-    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+    if (ui->listWidget->currentRow() != 0){
         QString currentItem = ui->listWidget->currentItem()->text();
         if (QString::compare(currentItem, "") != 0){
             QStringList currentItemList = currentItem.split("\t");
