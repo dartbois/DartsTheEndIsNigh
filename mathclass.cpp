@@ -65,88 +65,6 @@ string mathClass::winThrowCalc(int player){
 
     return finalWinThrow;
 
-    /*
-    string winThrow = NULL; //return value
-    int score = currentScore[player]; //initialize with player's score
-    int remScore = 0; //score except for largest double
-    int largestDouble = 0; //largest double
-    int largestScore2 = 0, printScore = 0;
-    int i = 0; //iterator
-    bool solFinder = false, valChecker = false, failFind = false; //has a solution been found?
-    char doubTrip = NULL;
-    //logic to find the largest possible remaining double
-    if (score > 170)
-    {
-        failFind = true;
-    }
-    if (score > 50)
-        largestDouble = 50;
-        else if (score <= 40) {
-            if (score%2 == 0) {
-                largestDouble = score;
-                solFinder = true;
-            }
-       else {
-            largestDouble = score - 1;
-       }
-    }
-    else {
-            largestDouble = 40;
-        }
-   if (largestDouble == 0) {
-            failFind = true;
-   }
-   //logic to find the largest possible score past the double
-   remScore = score - largestDouble;
-   if (failFind == false && solFinder == false) {
-       if (scoreValidator(remScore) == true) {
-          largestScore2 = remScore;
-       }
-       else {
-       i = remScore;
-               valChecker = false;
-               while (valChecker == false) {
-                   valChecker = scoreValidator(i);
-                   i--;
-               }
-               largestScore2 = i + 1;
-               remScore = remScore - largestScore2;
-           }
-        }
-    if (failFind == true) {
-        winThrow = "N/A";
-    }
-    else if (solFinder == true) {
-        winThrow = "D" + to_string(largestDouble);
-    }
-    else {
-        winThrow = "D" + to_string(largestDouble);
-        if (largestScore2%2 == 0) {
-            doubTrip = 'D';
-            printScore = largestScore2/2;
-        }
-        else if (largestScore2%3 == 0) {
-            doubTrip = 'T';
-            printScore = largestScore2/3;
-        }
-        else
-            doubTrip = 'S';
-        winThrow = doubTrip + to_string(printScore) + winThrow;
-        if (remScore != 0){
-            if (remScore%2 == 0) {
-                doubTrip = 'D';
-                printScore = remScore/2;
-            }
-            else if (remScore%3 == 0) {
-                doubTrip = 'T';
-                printScore = remScore/3;
-            }
-            else
-                doubTrip = 'S';
-            winThrow = doubTrip + to_string(printScore) + winThrow;
-        }
-    }
-    */
 };
 
 //returns 0 if player has not reached 0, 1 if player wins,
@@ -189,4 +107,10 @@ string mathClass::dataGet(string request) {
         answer = to_string(this->currentScore[1]);
     }
     return answer;
+}
+
+
+void mathClass::newLeg(){
+    currentScore[0] = currentScore[1] = startScore;
+
 }

@@ -193,7 +193,7 @@ void ScorerView::on_ValadationYes_clicked()
     QString slingHolder = "";
 
     //code to get values from slings 1, 2, 3
-    if (myP.active == true) { //if player 1 is active
+    if (myP.active == false) { //if player 1 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
@@ -211,7 +211,7 @@ void ScorerView::on_ValadationYes_clicked()
 
         winner = myM.scoreSubtract(0, slingInt);
     }
-    else { //if myP.active is false, player2 is active
+    else { //if myP.active is true, player2 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
@@ -230,14 +230,6 @@ void ScorerView::on_ValadationYes_clicked()
         winner = myM.scoreSubtract(1, slingInt);
     }
 
-
-    //flips a boolean value which controls which player is being affected by all this
-
-
-    SlingOneText->clear();
-    SlingTwoText->clear();
-    SlingThreeText->clear();
-
     emit sendValidateTrue(false);    //sending false will unblock the scoring
     //Show the validated throw on the current throw
     lastThrow->clear();
@@ -255,14 +247,15 @@ void ScorerView::on_ValadationYes_clicked()
     SlingTwoText->clear();
     SlingThreeText->clear();
 
+    myP.active = !(myP.active);
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
         legWinner(winner);
     }
     else {
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
-    myP.active = !(myP.active);
+        //flips a boolean value which controls which player is being affected by all this
+        myP.active = !(myP.active);
     }
-
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -331,5 +324,8 @@ void ScorerView::legWinner(int winnerIndex) {
             //we will boot up a sqlhandler and YEET THAT INFO INTO THE DB.
         }
     }
+    else { //convert to next leg
+        myM.newLeg();
+        myP.active = false;
+    }
 }
-
