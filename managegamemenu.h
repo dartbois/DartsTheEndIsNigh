@@ -3,7 +3,6 @@
 
 #include <QtWidgets/QDialog>
 #include "gameaddeditmenu.h"
-#include "gamereviewmenu.h"
 
 //this is a UI class.
 //This class is the window from which the user manages games.
@@ -38,13 +37,10 @@ private slots:
     //Refreshes the list when a new game is added.
     void refreshGameAdded();
 
-    void on_GameMenuReview_clicked();
-
 private:
     //UI info and instantiating a gameAddEditMenu
     Ui::ManageGameMenu *ui;
     GameAddEditMenu* gameAddEditMenu;
-    GameReviewMenu* gameReviewMenu;
 
 };
 

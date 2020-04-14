@@ -20,12 +20,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-RC_ICONS = logo.ico
-
 SOURCES += \
 datahandler.cpp \
     gameaddeditmenu.cpp \
-    gamereviewmenu.cpp \
     main.cpp \
     managechoicemenu.cpp \
     managegamemenu.cpp \
@@ -45,7 +42,6 @@ INSTALLS += target
 
 FORMS += \
     gameaddeditmenu.ui \
-    gamereviewmenu.ui \
     managechoicemenu.ui \
     managegamemenu.ui \
     manageplayermenu.ui \
@@ -58,7 +54,6 @@ FORMS += \
 HEADERS += \
 datahandler.h \
     gameaddeditmenu.h \
-    gamereviewmenu.h \
     managechoicemenu.h \
     managegamemenu.h \
     manageplayermenu.h \

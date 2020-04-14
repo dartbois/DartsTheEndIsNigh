@@ -13,7 +13,6 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
     connect(this, SIGNAL(sendScorerViewMSD(MatchStartData)), scorerWindow, SLOT(getMSD(MatchStartData)));
-    ui->listWidget->setCurrentRow(0);
 }
 
 GameSelectionMenu::~GameSelectionMenu()
@@ -23,26 +22,20 @@ GameSelectionMenu::~GameSelectionMenu()
 
 void GameSelectionMenu::on_pushButton_clicked()
 {
-    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentItem()->text() != ""){
-        //get the ID of the selected list item
-        //put it in a matchstartdata then send it to scorerview
-        QListWidgetItem * myGame = ui->listWidget->currentItem();
-        QStringList gameString = myGame->text().split("\t");
-        QString gameIDstring = gameString[0];
-        QString completed = gameString[6];
+    //DataHandler myD;
+    //get the ID of the selected list item
+    //put it in a matchstartdata then send it to scorerview
+    QListWidgetItem * myGame = ui->listWidget->currentItem();
+    QStringList gameString = myGame->text().split("\t");
+    QString gameIDstring = gameString[0];
+    int gameID = gameIDstring.toInt();
+    myMSD.postInit(gameID);
+    //myD.matchGSMtoSV(scorerWindow, myMSD.gameStartScore);
+    emit sendScorerViewMSD(myMSD);
 
-        if (completed == "0"){
-
-            int gameID = gameIDstring.toInt();
-            myMSD.postInit(gameID);
-            //myD.matchGSMtoSV(scorerWindow, myMSD.gameStartScore);
-            emit sendScorerViewMSD(myMSD);
-
-            scorerWindow->show();
-            audienceWindow->show();
-            this->hide();
-        }
-    }
+    scorerWindow->show();
+    audienceWindow->show();
+    this->hide();
 }
 
 void GameSelectionMenu::FillGameList(){
@@ -52,7 +45,7 @@ void GameSelectionMenu::FillGameList(){
     //Begin by clearing the list
     ui->listWidget->clear();
 
-    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID\tCompleted?";
+    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
     ui->listWidget->addItem(header);
 
     //Return a string of game info from sqlhandler. \n delimited.

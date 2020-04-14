@@ -320,11 +320,11 @@ string sqlHandler::sqlGetGameList() {
     string temp;
     string gameInfoLine = "";
 
-    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2, Completed FROM games ORDER BY [Game ID]");
+    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2 FROM games ORDER BY [Game ID]");
     query.exec();
 
     while (query.next()){
-        for (int i=0; i<7; i++){
+        for (int i=0; i<6; i++){
             temp = query.value(i).toString().toStdString();
             gameInfoLine.append(temp);
             gameInfoLine.append("\t");

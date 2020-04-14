@@ -5,11 +5,21 @@
 mathClass::mathClass(int scoreStart)
 {
     currentScore[0] = scoreStart, currentScore[1] = scoreStart;
-
+    legWins[0] = 0;
+    legWins[1] = 1;
+    matchWins[0] = 0;
+    matchWins[1] = 0;
+    matchesHeld = 0;
+    ties = 0;
 };
 
 mathClass::mathClass(){
-
+    legWins[0] = 0;
+    legWins[1] = 1;
+    matchWins[0] = 0;
+    matchWins[1] = 0;
+    matchesHeld = 0;
+    ties = 0;
 }
 
 string mathClass::winnerCalc(){
@@ -139,11 +149,28 @@ string mathClass::winThrowCalc(int player){
     */
 };
 
-
-void mathClass::scoreSubtract(int player, int throwScore){
+//returns 0 if player has not reached 0, 1 if player wins,
+//and 2 if player is in the negatives (opponent win).
+int mathClass::scoreSubtract(int player, int throwScore){
+    int winner = 0;
     int score = currentScore[player];
     score = score - throwScore;
     currentScore[player] = score;
+    if (currentScore[player] == 0) { //if the current player hits 0, they win the leg.
+        winner = player;
+    }
+    else if (currentScore[player] < 0){ //if the current player goes past 0, the other player wins the leg.
+        if (player == 0) {
+            winner = 1;
+        }
+        else {
+            winner = 0;
+        }
+    }
+    else { //otherwise, the match continues as normal.
+        winner = 2;
+    }
+    return winner;
 };
 
 
