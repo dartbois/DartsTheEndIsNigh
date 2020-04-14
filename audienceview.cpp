@@ -255,8 +255,9 @@ void AudienceView::setLatestThrowText(QString *latestThrow)
     {
         ui->PlayerOneLastThrowLabel->setText(*latestThrow);
     }
-    if(playerCounter % 2 == 0)
+    else
     {
         ui->PlayerTwoLastThrowLabel->setText(*latestThrow);
     }
+    playerCounter++;
 }
