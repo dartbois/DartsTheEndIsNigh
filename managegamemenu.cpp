@@ -1,6 +1,7 @@
 #include "managegamemenu.h"
 #include "ui_managegamemenu.h"
 #include "datahandler.h"
+#include "gamereviewmenu.h"
 
 ManageGameMenu::ManageGameMenu(QWidget *parent) :
     QDialog(parent),
@@ -91,4 +92,10 @@ void ManageGameMenu::on_GameMenuRemove_clicked()
 
 void ManageGameMenu::refreshGameAdded(){
     FillGameList();
+}
+
+void ManageGameMenu::on_GameMenuReview_clicked()
+{
+    gameReviewMenu = new GameReviewMenu();
+    gameReviewMenu -> show();
 }

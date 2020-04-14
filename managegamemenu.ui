@@ -41,10 +41,37 @@
       <enum>QFrame::Raised</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="5" column="0">
+      <item row="0" column="0" alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>400</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>This is where you can manage games!</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
        <widget class="QPushButton" name="GameMenuRemove">
         <property name="text">
          <string>Remove</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QPushButton" name="GameMenuEdit">
+        <property name="text">
+         <string>Edit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="GameMenuAdd">
+        <property name="text">
+         <string>Add</string>
         </property>
        </widget>
       </item>
@@ -58,30 +85,10 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QPushButton" name="GameMenuAdd">
+      <item row="5" column="0">
+       <widget class="QPushButton" name="GameMenuReview">
         <property name="text">
-         <string>Add</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QPushButton" name="GameMenuEdit">
-        <property name="text">
-         <string>Edit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label">
-        <property name="maximumSize">
-         <size>
-          <width>400</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>This is where you can manage games!</string>
+         <string>Review</string>
         </property>
        </widget>
       </item>
