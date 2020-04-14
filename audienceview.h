@@ -4,7 +4,10 @@
 #include <QDialog>
 #include <QLabel>
 
-
+//this is a UI class
+//This class controls the window the audience would see.
+//--This includes various statistics displays.
+//It is instantiated in GameSelectionMenu and interacts often with ScorerView.
 
 namespace Ui {
 class AudienceView;
@@ -17,7 +20,10 @@ class AudienceView : public QDialog
 public:
     explicit AudienceView(QWidget *parent = nullptr);
     ~AudienceView();
+    int playerCounter;
 
+    //slots can be connected to signals to recieve information
+    //broadcast from one instantiated function to another
 public slots:
 
     void on_StatisticsDisplay_linkActivated(const QString &link);
@@ -45,7 +51,9 @@ public slots:
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
 public:
+   //initializes the UI
    Ui::AudienceView *ui;
+   //set of labels controlling stats displays in the UI
    QLabel *StatisticsDisplay;
    QLabel *Player2Stats;
    QLabel *BothP1AndP2Stats;
@@ -58,6 +66,8 @@ public:
 
 
 private slots:
+   //when a button is checked in scorerview,
+   //these functions make audienceview respond.
    void on_Player2Stats_linkActivated(const QString &link);
    void on_BothP1AndP2Stats_linkActivated(const QString &link);
    void on_CurrentPlayer_linkActivated(const QString &link);

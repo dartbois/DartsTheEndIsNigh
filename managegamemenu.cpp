@@ -12,6 +12,9 @@ ManageGameMenu::ManageGameMenu(QWidget *parent) :
     FillGameList();
     gameAddEditMenu = new GameAddEditMenu();
 
+    //experimental
+    connect(gameAddEditMenu, SIGNAL(refreshGList()), this, SLOT(refreshGameAdded()));
+
 }
 
 ManageGameMenu::~ManageGameMenu()
@@ -40,6 +43,8 @@ void ManageGameMenu::FillGameList(){
 
     //Add list to listWidget
     ui->listWidget->addItems(gameInfoList);
+
+    ui->listWidget->setCurrentRow(0);
 }
 
 void ManageGameMenu::on_GameMenuAdd_clicked()
@@ -49,24 +54,47 @@ void ManageGameMenu::on_GameMenuAdd_clicked()
 
 void ManageGameMenu::on_GameMenuEdit_clicked()
 {
-    gameAddEditMenu -> show();
+    int gotGID;
+    if (ui->listWidget->currentRow() != 0){
+        QString currentItem = ui->listWidget->currentItem()->text();
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            gotGID = currentItemList[0].toInt();
+
+            gameAddEditMenu->oGID = gotGID;
+            gameAddEditMenu -> show();
+        }
+    }
+
 }
 
 void ManageGameMenu::on_GameMenuRemove_clicked()
 {
-    if (ui->listWidget->currentRow() != 0){
+    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
         DataHandler myD;
 
         QString currentItem = ui->listWidget->currentItem()->text();
-        QStringList currentItemList = currentItem.split("\t");
-        currentItem = currentItemList[0];
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            currentItem = currentItemList[0];
 
-        string currentItemID = currentItem.toStdString();
+            string currentItemID = currentItem.toStdString();
 
-        string req = currentItemID + ":removeGame";
+            string req = currentItemID + ":removeGame";
 
-        myD.sqlGet(req);
+            myD.sqlGet(req);
 
-        FillGameList();
+            FillGameList();
+        }
     }
+}
+
+void ManageGameMenu::refreshGameAdded(){
+    FillGameList();
+}
+
+void ManageGameMenu::on_GameMenuReview_clicked()
+{
+   gameReviewMenu = new GameReviewMenu();
+    gameReviewMenu -> show();
 }

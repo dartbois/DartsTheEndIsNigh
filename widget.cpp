@@ -268,7 +268,7 @@ Widget::~Widget()
 void Widget::addScore()
 {
     QPieSlice *slice = qobject_cast<QPieSlice *>(sender());
-
+    m_slices.append(slice);
     Widget::scoreDisplayer->clear();
 //    QString scoreString = "Score: ";
 //    scoreString.append(QString::number(this->score));
@@ -310,5 +310,9 @@ void Widget::validationBlocker(bool blockForValidation)
         connect(this, SIGNAL(scoreSignalTwo(int)), theParent, SLOT(set_SlingTwoText(int)));
         connect(this, SIGNAL(scoreSignalThree(int)), theParent, SLOT(set_SlingThreeText(int)));
         validateState = true;
+        for(int i = 0; i < m_slices.size(); i++)
+        {
+            m_slices[i]->setLabelVisible(false);
+        }
     }
 }
