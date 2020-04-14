@@ -30,7 +30,7 @@ void ManageGameMenu::FillGameList(){
     //Begin by clearing the list
     ui->listWidget->clear();
 
-    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
+    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID\tCompleted?";
     ui->listWidget->addItem(header);
 
     //Return a string of game info from sqlhandler. \n delimited.
