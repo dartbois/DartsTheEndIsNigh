@@ -217,10 +217,6 @@ void ScorerView::on_ValadationYes_clicked()
     //flips a boolean value which controls which player is being affected by all this
     myP.active = !(myP.active);
 
-    SlingOneText->clear();
-    SlingTwoText->clear();
-    SlingThreeText->clear();
-
     emit sendValidateTrue(false);    //sending false will unblock the scoring
     //Show the validated throw on the current throw
     lastThrow->clear();

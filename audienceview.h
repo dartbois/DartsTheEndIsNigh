@@ -20,6 +20,7 @@ class AudienceView : public QDialog
 public:
     explicit AudienceView(QWidget *parent = nullptr);
     ~AudienceView();
+    int playerCounter;
 
     //slots can be connected to signals to recieve information
     //broadcast from one instantiated function to another

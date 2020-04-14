@@ -39,6 +39,8 @@ void sqlHandler::sqlCloseConnection(){
 }
 
 
+
+
 //Getters: used to get individual player values from SQLite db
 string sqlHandler::sqlGetFirstName(int playerID){
     QSqlQuery query;

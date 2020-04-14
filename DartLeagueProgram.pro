@@ -20,6 +20,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+RC_ICONS = logo.ico
+
 SOURCES += \
 datahandler.cpp \
     gameaddeditmenu.cpp \
@@ -77,5 +79,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    DartLeague.db
+#DISTFILES += \
+#   DartLeague.db
+
+
+database.path = $$OUT_PWD
+database.files = $$PWD/Database/*
+
+QMAKE_POST_LINK += copy $$OUT_PWD/DartLeague.db $$PWD/Database/DartLeague.db

@@ -18,3 +18,13 @@ GameReviewMenu::~GameReviewMenu()
     delete ui;
 
 }
+
+void GameReviewMenu::on_gameReviewEdit_clicked()
+{
+
+}
+
+void GameReviewMenu::on_gameReviewCancel_clicked()
+{
+
+}

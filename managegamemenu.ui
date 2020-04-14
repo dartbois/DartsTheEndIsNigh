@@ -52,6 +52,9 @@
         <property name="text">
          <string>This is where you can manage games!</string>
         </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item row="6" column="0">
