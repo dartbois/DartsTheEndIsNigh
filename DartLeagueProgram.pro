@@ -79,11 +79,5 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-#DISTFILES += \
-#   DartLeague.db
-
-
-database.path = $$OUT_PWD
-database.files = $$PWD/Database/*
-
-QMAKE_POST_LINK += copy $$OUT_PWD/DartLeague.db $$PWD/Database/DartLeague.db
+DISTFILES += \
+    DartLeague.db

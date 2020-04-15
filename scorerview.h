@@ -135,6 +135,7 @@ public:
     mathClass myM;
     int beginScore;
     player myP;
+    void legWinner(int playerID);
 };
 
 #endif // SCORERVIEW_H

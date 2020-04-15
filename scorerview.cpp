@@ -188,34 +188,47 @@ void ScorerView::set_SlingThreeText(int score)
 
 void ScorerView::on_ValadationYes_clicked()
 {
+    int winner = 0;
+    int slingInt = 0;
     QString slingHolder = "";
+
     //code to get values from slings 1, 2, 3
     if (myP.active == true) { //if player 1 is active
         slingHolder = SlingOneText->text();
+        slingInt = slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("-");
+
         slingHolder = SlingTwoText->text();
+        slingInt += slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("-");
+
         slingHolder = SlingThreeText->text();
+        slingInt += slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("/t");
+
+        winner = myM.scoreSubtract(0, slingInt);
     }
     else { //if myP.active is false, player2 is active
         slingHolder = SlingOneText->text();
+        slingInt = slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("-");
+
         slingHolder = SlingTwoText->text();
+        slingInt += slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("-");
+
         slingHolder = SlingThreeText->text();
+        slingInt += slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("/t");
-    }
-    //code that does score calculation and stuff
 
-    //flips a boolean value which controls which player is being affected by all this
-    myP.active = !(myP.active);
+        winner = myM.scoreSubtract(1, slingInt);
+    }
 
     emit sendValidateTrue(false);    //sending false will unblock the scoring
     //Show the validated throw on the current throw
@@ -233,6 +246,15 @@ void ScorerView::on_ValadationYes_clicked()
     SlingOneText->clear();
     SlingTwoText->clear();
     SlingThreeText->clear();
+
+    if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
+        legWinner(winner);
+    }
+    else {
+        //Otherwise, we go to the next leg. Not sure how to implement this exactly.
+        //flips a boolean value which controls which player is being affected by all this
+        myP.active = !(myP.active);
+    }
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -264,5 +286,41 @@ void ScorerView::getMSD(MatchStartData myMSD){
     myM.currentScore[0] = myMSD.gameStartScore;
     myM.currentScore[1] = myMSD.gameStartScore;
     myM.startScore = myMSD.gameStartScore;
+    myM.legTotal = myMSD.gameLegs;
+    myM.matchTotal = myMSD.gameMatches;
     myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
+}
+
+void ScorerView::legWinner(int winnerIndex) {
+    int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
+    //verify leg winner! do a window or something
+    myM.legWins[winnerIndex] += 1;
+
+    //it is impossible to tie on legs, so total number of legs is just total number of leg victories.
+    if ((myM.legWins[0] + myM.legWins[1]) == myM.legTotal){
+        //This match is complete!
+        if (myM.legWins[0] > myM.legWins[1]) { //p1 has more LEG wins
+            myM.matchWins[0] += 1;
+        }
+        else if (myM.legWins[1] > myM.legWins[0]){ //p2 has more LEG wins
+            myM.matchWins[1] += 1;
+        }
+        else { //in case of a tie
+            myM.ties += 1;
+        }
+        myM.matchesHeld += 1; //update matches held : 3
+        if (myM.matchesHeld == myM.matchTotal) {
+            //THA GAME IS DONE>
+            if (myM.matchWins[0] > myM.matchWins[1]){ //p1 has more MATCH wins
+                victoryIndex = 0;
+            }
+            else if (myM.matchWins[1] > myM.matchWins[0]){ //p2 has more MATCH wins
+                victoryIndex = 1;
+            }
+            else { //tie
+                victoryIndex = 2;
+            }
+            //we will boot up a sqlhandler and YEET THAT INFO INTO THE DB.
+        }
+    }
 }

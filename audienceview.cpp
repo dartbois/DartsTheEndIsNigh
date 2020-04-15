@@ -25,7 +25,6 @@ AudienceView::AudienceView(QWidget *parent) :
     MatchStats = ui->MatchStats;
     RankedStats = ui->RankedStats;
     playerCounter = 1;
-
 }
 
 AudienceView::~AudienceView()
@@ -249,6 +248,7 @@ void AudienceView::undoPlayerOneStatsText()
 {
     ui->StatisticsDisplay->clear();
 }
+
 void AudienceView::setLatestThrowText(QString *latestThrow)
 {
     if(playerCounter % 2 == 1)

@@ -15,11 +15,6 @@ public:
     explicit GameReviewMenu(QWidget *parent = nullptr);
     ~GameReviewMenu();
 
-private slots:
-    void on_gameReviewEdit_clicked();
-
-    void on_gameReviewCancel_clicked();
-
 private:
     Ui::GameReviewMenu *ui;
 };
