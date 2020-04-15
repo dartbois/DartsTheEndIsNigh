@@ -196,6 +196,9 @@ int sqlHandler::sqlGetGamesWon(int playerID){
     return query.value(0).toInt();
 }
 
+
+
+
 //Getters: used to get individual game information from db
 string sqlHandler::sqlGetGameName(int gameID){
     QSqlQuery query;
@@ -293,6 +296,44 @@ int sqlHandler::sqlGetGameP2(int gameID){
     return query.value(0).toInt();
 }
 
+int sqlHandler::sqlGetWinner(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT Winner FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toInt();
+}
+
+string sqlHandler::sqlGetP1Slings(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT P1Slings FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toString().toStdString();
+}
+
+string sqlHandler::sqlGetP2Slings(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT P2Slings FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toString().toStdString();
+}
+
+
+
 //Getter: needs to get all player information from SQLite (for populating lists)
 string sqlHandler::sqlGetPlayerList() {
     QSqlQuery query;
@@ -320,11 +361,11 @@ string sqlHandler::sqlGetGameList() {
     string temp;
     string gameInfoLine = "";
 
-    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2 FROM games ORDER BY [Game ID]");
+    query.prepare("SELECT [Game ID], [Game Name], Date, Location, Player1, Player2, Completed FROM games ORDER BY [Game ID]");
     query.exec();
 
     while (query.next()){
-        for (int i=0; i<6; i++){
+        for (int i=0; i<7; i++){
             temp = query.value(i).toString().toStdString();
             gameInfoLine.append(temp);
             gameInfoLine.append("\t");

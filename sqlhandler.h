@@ -36,6 +36,9 @@ public:
     int sqlGetGameLegs(int gameID);
     int sqlGetGameP1(int gameID);
     int sqlGetGameP2(int gameID);
+    int sqlGetWinner(int gameID);
+    string sqlGetP1Slings(int gameID);
+    string sqlGetP2Slings(int gameID);
 
     string sqlGetPlayerList();
     string sqlGetGameList();

@@ -1,6 +1,7 @@
 #include "managegamemenu.h"
 #include "ui_managegamemenu.h"
 #include "datahandler.h"
+#include "gamereviewmenu.h"
 
 ManageGameMenu::ManageGameMenu(QWidget *parent) :
     QDialog(parent),
@@ -11,6 +12,7 @@ ManageGameMenu::ManageGameMenu(QWidget *parent) :
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     FillGameList();
     gameAddEditMenu = new GameAddEditMenu();
+    gameReviewMenu = new GameReviewMenu();
 
     //experimental
     connect(gameAddEditMenu, SIGNAL(refreshGList()), this, SLOT(refreshGameAdded()));
@@ -29,7 +31,7 @@ void ManageGameMenu::FillGameList(){
     //Begin by clearing the list
     ui->listWidget->clear();
 
-    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
+    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID\tCompleted?";
     ui->listWidget->addItem(header);
 
     //Return a string of game info from sqlhandler. \n delimited.
@@ -91,4 +93,25 @@ void ManageGameMenu::on_GameMenuRemove_clicked()
 
 void ManageGameMenu::refreshGameAdded(){
     FillGameList();
+}
+
+void ManageGameMenu::on_GameMenuReview_clicked()
+{
+    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+        DataHandler myD;
+        int gotGID;
+        QString currentItem = ui->listWidget->currentItem()->text();
+
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            gotGID = currentItemList[0].toInt();
+
+            if (currentItemList[6] == "1"){
+                gameReviewMenu->oGID = gotGID;
+                gameReviewMenu->FillMenu(gotGID);
+                gameReviewMenu -> show();
+            }
+
+        }
+    }
 }
