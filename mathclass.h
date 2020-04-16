@@ -15,10 +15,16 @@ public:
     mathClass();
     string winnerCalc(); //calculates the match winner
     string winThrowCalc(int player); //calculates the winning throws
-    void scoreSubtract(int player, int throwScore); //subtracts score from total, player is 0 or 1
+    int scoreSubtract(int player, int throwScore); //subtracts score from total, player is 0 or 1
     string dataGet(string request); //Facilitates data transmission
     bool scoreValidator(int remScore);
     int currentScore[2]; //current score
+    int legWins[2];
+    int legTotal;
+    int matchWins[2];
+    int matchTotal;
+    int matchesHeld;
+    int ties;
     int startScore;
 private:
 

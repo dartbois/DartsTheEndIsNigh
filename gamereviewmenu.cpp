@@ -26,5 +26,22 @@ void GameReviewMenu::on_gameReviewEdit_clicked()
 
 void GameReviewMenu::on_gameReviewCancel_clicked()
 {
+    this->hide();
+}
+
+void GameReviewMenu::on_EditP1Throws_clicked()
+{
+    editThrowsMenu = new EditThrowsMenu();
+    editThrowsMenu -> show();
+}
+
+void GameReviewMenu::on_EditP2Throws_clicked()
+{
+    editThrowsMenu = new EditThrowsMenu();
+    editThrowsMenu -> show();
+}
+
+void GameReviewMenu::on_ChangeWinner_clicked()
+{
 
 }
