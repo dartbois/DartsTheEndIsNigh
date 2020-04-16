@@ -23,7 +23,6 @@ RC_ICONS = logo.ico
 
 SOURCES += \
 datahandler.cpp \
-    editthrowsmenu.cpp \
     gameaddeditmenu.cpp \
     gamereviewmenu.cpp \
     main.cpp \
@@ -44,7 +43,6 @@ datahandler.cpp \
 INSTALLS += target
 
 FORMS += \
-    editthrowsmenu.ui \
     gameaddeditmenu.ui \
     gamereviewmenu.ui \
     managechoicemenu.ui \
@@ -58,7 +56,6 @@ FORMS += \
 
 HEADERS += \
 datahandler.h \
-    editthrowsmenu.h \
     gameaddeditmenu.h \
     gamereviewmenu.h \
     managechoicemenu.h \
