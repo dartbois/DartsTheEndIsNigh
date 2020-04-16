@@ -104,6 +104,7 @@ signals:
     //These signals will be used to send the latest throw string to Audience View
     void sendLatestThrow(QString *latestThrow);
 
+
 public:
     //various UI elements
     Ui::ScorerView *ui;
@@ -136,6 +137,7 @@ public:
     int beginScore;
     player myP;
     void legWinner(int playerID);
+    AudienceView* m_audienceWindow;
 };
 
 #endif // SCORERVIEW_H

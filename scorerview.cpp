@@ -21,6 +21,7 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     currentThrowLabel = ui->CurrentThrowLabel;
     lastThrowLabel = ui->LastThrowLabel;
     audienceWindow->players = &myP;
+    m_audienceWindow = audienceWindow;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
@@ -44,7 +45,6 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
    connect(this, &ScorerView::sendPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoPlayerTwoStatsText);
-
 
 
 
@@ -257,6 +257,8 @@ void ScorerView::on_ValadationYes_clicked()
 
    // }
     myP.active = !(myP.active);
+    emit sendCurrentPlayerStatsUndo();
+    emit sendCurrentPlayerStats();
 }
 
 void ScorerView::on_ValadationNo_clicked()

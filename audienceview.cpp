@@ -176,7 +176,6 @@ void AudienceView::setBothP1AndP2StatsText()
 void AudienceView::setCurrentPlayerText()
 {
     ui->CurrentPlayer->setText("Current Player Statistics : ");
-    //Insert Current player deduction here
 
     DataHandler myD;
 
@@ -220,8 +219,9 @@ void AudienceView::setCurrentPlayerText()
         stats.append(statsRank);
         stats.append(statsAvg180s);
 
-
+        ui->CurrentPlayer->clear();
         ui->CurrentPlayer->setText(stats);
+        ui->CurrentPlayer->show();
     }
     else        //current player is player2
     {
@@ -259,11 +259,10 @@ void AudienceView::setCurrentPlayerText()
         stats.append(statsRank);
         stats.append(statsAvg180s);
 
-
+        ui->CurrentPlayer->clear();
         ui->CurrentPlayer->setText(stats);
+        ui->CurrentPlayer->show();
     }
-    ui->CurrentPlayer->setVisible(false);
-    ui->CurrentPlayer->setVisible(true);
 }
 
 void AudienceView::setNumberOf180sText()
