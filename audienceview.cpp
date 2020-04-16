@@ -274,41 +274,46 @@ void AudienceView::setNumberOf180sText()
     QString statsName, statsHome, statsRank, statsAvg180s;
     QString temp2;
 
-    statsName = "Name: ";
+    QString playerOneData;
+    QString playerTwoData;
+    QString playersData = "Number of 180s:\n";
+
+    playerOneData = "Name: \t";
     string temp = players->playerFirst[0];
     temp2 = QString::fromStdString(temp);
-    statsName.append(temp2);
-    statsName.append(" ");
-    temp = players->playerLast[1];
+    playerOneData.append(temp2);
+    playerOneData.append(" ");
+    temp = players->playerLast[0];
     temp2 = QString::fromStdString(temp);
-    statsName.append(temp2);
-    statsName.append("\t");
+    playerOneData.append(temp2);
+    playerOneData.append("\t");
 
-    statsAvg180s = "Average 180s per Match: ";
+    playerOneData.append("Average 180s per Match: ");
     float tempFloat = players->playerAvg180s[0];
     temp2 = QString::number(tempFloat);
-    statsAvg180s.append(temp2);
-    statsAvg180s.append("\n\n");
+    playerOneData.append(temp2);
+    playerOneData.append("\n");
 
-    statsName = "Name: ";
+    playerTwoData = "Name: \t";
     temp = players->playerFirst[1];
     temp2 = QString::fromStdString(temp);
-    statsName.append(temp2);
-    statsName.append(" ");
+    playerTwoData.append(temp2);
+    playerTwoData.append(" ");
     temp = players->playerLast[1];
     temp2 = QString::fromStdString(temp);
-    statsName.append(temp2);
-    statsName.append("\t");
+    playerTwoData.append(temp2);
+    playerTwoData.append("\t");
 
-    statsAvg180s = "Average 180s per Match: ";
+    playerTwoData.append("Average 180s per Match: ");
     tempFloat = players->playerAvg180s[1];
     temp2 = QString::number(tempFloat);
-    statsAvg180s.append(temp2);
-    statsAvg180s.append("\n");
+    playerTwoData.append(temp2);
 
-    stats.append(statsName);
-    stats.append(statsAvg180s);
-    ui->CurrentPlayer->setText(stats);
+    playersData.append(playerOneData);
+    playersData.append("\n");
+    playersData.append(playerTwoData);
+
+    ui->NumberOf180s->setText(playersData);
 }
 
 void AudienceView::setWinPercentagesText()
