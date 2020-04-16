@@ -13,6 +13,7 @@ public:
     player(int playerID, int playerID2);
     player();
     void postInit(int playerID, int PlayerID2);
+    int playerIDs[2];
     string playerFirst[2];
     string playerLast[2];
     string playerHometown[2];

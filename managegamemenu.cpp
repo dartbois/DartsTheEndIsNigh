@@ -1,6 +1,7 @@
 #include "managegamemenu.h"
 #include "ui_managegamemenu.h"
 #include "datahandler.h"
+#include "gamereviewmenu.h"
 
 ManageGameMenu::ManageGameMenu(QWidget *parent) :
     QDialog(parent),
@@ -29,7 +30,7 @@ void ManageGameMenu::FillGameList(){
     //Begin by clearing the list
     ui->listWidget->clear();
 
-    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID";
+    QString header = "Game ID\tGame Name\tDate\tLocation\tPlayer1 ID\tPlayer2 ID\tCompleted?";
     ui->listWidget->addItem(header);
 
     //Return a string of game info from sqlhandler. \n delimited.
@@ -95,6 +96,6 @@ void ManageGameMenu::refreshGameAdded(){
 
 void ManageGameMenu::on_GameMenuReview_clicked()
 {
-   gameReviewMenu = new GameReviewMenu();
+    gameReviewMenu = new GameReviewMenu();
     gameReviewMenu -> show();
 }

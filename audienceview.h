@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QLabel>
+#include "player.h"
 
 //this is a UI class
 //This class controls the window the audience would see.
@@ -63,7 +64,7 @@ public:
    QLabel *PersonalStats;
    QLabel *MatchStats;
    QLabel *RankedStats;
-
+   player *players;
 
 private slots:
    //when a button is checked in scorerview,

@@ -21,7 +21,7 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     currentThrowLabel = ui->CurrentThrowLabel;
     lastThrowLabel = ui->LastThrowLabel;
     audienceWindow->players = &myP;
-
+    m_audienceWindow = audienceWindow;
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
    connect(this, &ScorerView::sendPlayerTwoStats, audienceWindow, &AudienceView::setPlayerTwoStatsText);

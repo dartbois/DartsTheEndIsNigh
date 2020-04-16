@@ -6,7 +6,8 @@ player::player(int playerID, int playerID2)
     active = false; //false is player 1, true is player 2
     p1Slings = ""; //player 1's slings
     p2Slings = ""; //player 2's slings
-
+    playerIDs[0] = playerID;
+    playerIDs[1] = playerID2;
 
     if (playerID == 0 && playerID2 == 0){
         for (int i = 0; i < 0; i++){
@@ -111,7 +112,7 @@ player::player(){
 
 void player::postInit(int playerID, int playerID2)
 {
-    active = 0;
+    active = false;
 
     if (playerID == 0 && playerID2 == 0){
         for (int i = 0; i < 0; i++){
