@@ -196,6 +196,9 @@ int sqlHandler::sqlGetGamesWon(int playerID){
     return query.value(0).toInt();
 }
 
+
+
+
 //Getters: used to get individual game information from db
 string sqlHandler::sqlGetGameName(int gameID){
     QSqlQuery query;
@@ -292,6 +295,44 @@ int sqlHandler::sqlGetGameP2(int gameID){
 
     return query.value(0).toInt();
 }
+
+int sqlHandler::sqlGetWinner(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT Winner FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toInt();
+}
+
+string sqlHandler::sqlGetP1Slings(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT P1Slings FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toString().toStdString();
+}
+
+string sqlHandler::sqlGetP2Slings(int gameID){
+    QSqlQuery query;
+
+    query.prepare("SELECT P2Slings FROM Games WHERE [Game ID] = ?");
+    query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+
+    return query.value(0).toString().toStdString();
+}
+
+
 
 //Getter: needs to get all player information from SQLite (for populating lists)
 string sqlHandler::sqlGetPlayerList() {
@@ -526,6 +567,44 @@ void sqlHandler::sqlRemoveGame(int gameID){
 
     query.prepare("DELETE FROM Games WHERE [Game ID] = ?");
     query.bindValue(0, gameID);
+
+    query.exec();
+    query.first();
+}
+
+//Setters: needs to update throws of a completed game
+void sqlHandler::sqlUpdateP1Throws(int gameID, string newThrows){
+    QSqlQuery query;
+
+    QString qThrows = QString::fromStdString(newThrows);
+
+    query.prepare("UPDATE Games SET [P1Slings] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, qThrows);
+    query.bindValue(1, gameID);
+
+    query.exec();
+    query.first();
+}
+
+void sqlHandler::sqlUpdateP2Throws(int gameID, string newThrows){
+    QSqlQuery query;
+
+    QString qThrows = QString::fromStdString(newThrows);
+
+    query.prepare("UPDATE Games SET [P2Slings] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, qThrows);
+    query.bindValue(1, gameID);
+
+    query.exec();
+    query.first();
+}
+
+void sqlHandler::sqlUpdateWinner(int gameID, int winner){
+    QSqlQuery query;
+
+    query.prepare("UPDATE Games SET [Winner] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, winner);
+    query.bindValue(1, gameID);
 
     query.exec();
     query.first();

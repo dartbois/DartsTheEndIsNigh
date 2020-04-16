@@ -26,37 +26,7 @@
    <property name="verticalSpacing">
     <number>3</number>
    </property>
-   <item row="7" column="6">
-    <widget class="Line" name="line_2">
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="7">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="maximumSize">
-      <size>
-       <width>400</width>
-       <height>16777215</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="2" rowspan="2">
-    <widget class="Line" name="line_6">
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="3" colspan="3">
+   <item row="5" column="2" colspan="3">
     <widget class="QFrame" name="frame">
      <property name="minimumSize">
       <size>
@@ -65,35 +35,24 @@
       </size>
      </property>
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QLabel" name="MainStatsLable">
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Stats :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="MatchStats">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="BothP1AndP2Stats">
-        <property name="text">
-         <string/>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#940002;&quot;&gt;Stats :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="PersonalStats">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -101,13 +60,25 @@
       </item>
       <item>
        <widget class="QLabel" name="NumberOf180s">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
         <property name="text">
          <string/>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QLabel" name="StatisticsDisplay">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -115,6 +86,9 @@
       </item>
       <item>
        <widget class="QLabel" name="Player2Stats">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -122,6 +96,9 @@
       </item>
       <item>
        <widget class="QLabel" name="RankedStats">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -129,6 +106,9 @@
       </item>
       <item>
        <widget class="QLabel" name="CurrentPlayer">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -136,6 +116,9 @@
       </item>
       <item>
        <widget class="QLabel" name="WinPercentages">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -144,87 +127,29 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="6" rowspan="6" colspan="2">
-    <widget class="QLabel" name="label_8">
-     <property name="text">
-      <string/>
+   <item row="5" column="5">
+    <widget class="QTableWidget" name="tableWidget">
+     <property name="maximumSize">
+      <size>
+       <width>400</width>
+       <height>16777215</height>
+      </size>
      </property>
-     <property name="pixmap">
-      <pixmap>../../../Pictures/RaidLOGO.PNG</pixmap>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="Line" name="line_5">
-     <property name="midLineWidth">
-      <number>3</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0" rowspan="2" colspan="6">
-    <widget class="Line" name="line">
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#aa0000;&quot;&gt;Win Predictions:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="4" rowspan="3" colspan="4">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>../../../../../Pictures/RaidLOGO.PNG</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0" colspan="8">
-    <widget class="Line" name="line_3">
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0" colspan="2">
-    <widget class="QFrame" name="frame_2">
      <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
+      <enum>QFrame::Box</enum>
      </property>
      <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
+      <enum>QFrame::Plain</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="1" column="1" alignment="Qt::AlignLeft|Qt::AlignTop">
@@ -236,8 +161,11 @@
       </item>
       <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
        <widget class="QLabel" name="label_2">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Latest Throws :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#940002;&quot;&gt;Latest Throws :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -248,17 +176,115 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3" alignment="Qt::AlignLeft|Qt::AlignVCenter">
+      <item row="0" column="2" colspan="2" alignment="Qt::AlignVCenter">
        <widget class="QLabel" name="PlayerOneLastThrowLabel">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
-         <string> </string>
+         <string/>
         </property>
        </widget>
       </item>
-      <item row="1" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
+      <item row="1" column="2" colspan="2" alignment="Qt::AlignTop">
        <widget class="QLabel" name="PlayerTwoLastThrowLabel">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
         <property name="text">
-         <string> </string>
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="5">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../../../Pictures/RaidLOGO.PNG</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2" colspan="3" alignment="Qt::AlignHCenter">
+    <widget class="QFrame" name="frame_3">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="1">
+       <widget class="QLabel" name="PlayerOnePredictions">
+        <property name="minimumSize">
+         <size>
+          <width>150</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="PlayerTwoPredictions">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="Line" name="line_5">
+        <property name="maximumSize">
+         <size>
+          <width>150</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="midLineWidth">
+         <number>3</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" rowspan="3" alignment="Qt::AlignRight">
+       <widget class="QLabel" name="label">
+        <property name="maximumSize">
+         <size>
+          <width>300</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#aa0000;&quot;&gt;Win Predictions:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -266,19 +292,11 @@
     </widget>
    </item>
   </layout>
-  <zorder>line</zorder>
-  <zorder>line_6</zorder>
-  <zorder>label_3</zorder>
-  <zorder>line_3</zorder>
-  <zorder>line_2</zorder>
   <zorder>frame</zorder>
   <zorder>frame_2</zorder>
   <zorder>tableWidget</zorder>
   <zorder>label_8</zorder>
-  <zorder>label_5</zorder>
-  <zorder>line_5</zorder>
-  <zorder>label_4</zorder>
-  <zorder>label</zorder>
+  <zorder>frame_3</zorder>
  </widget>
  <resources/>
  <connections/>
