@@ -257,8 +257,11 @@ void ScorerView::on_ValadationYes_clicked()
 
    // }
     myP.active = !(myP.active);
-    emit sendCurrentPlayerStatsUndo();
-    emit sendCurrentPlayerStats();
+    if(ui->CurrentPlayerStats->isChecked())
+    {
+        emit sendCurrentPlayerStatsUndo();
+        emit sendCurrentPlayerStats();
+    }
 }
 
 void ScorerView::on_ValadationNo_clicked()

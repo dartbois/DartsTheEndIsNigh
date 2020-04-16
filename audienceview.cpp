@@ -268,6 +268,47 @@ void AudienceView::setCurrentPlayerText()
 void AudienceView::setNumberOf180sText()
 {
     ui->NumberOf180s->setText("Number of 180s : ");
+    DataHandler myD;
+
+    QString stats;
+    QString statsName, statsHome, statsRank, statsAvg180s;
+    QString temp2;
+
+    statsName = "Name: ";
+    string temp = players->playerFirst[0];
+    temp2 = QString::fromStdString(temp);
+    statsName.append(temp2);
+    statsName.append(" ");
+    temp = players->playerLast[1];
+    temp2 = QString::fromStdString(temp);
+    statsName.append(temp2);
+    statsName.append("\t");
+
+    statsAvg180s = "Average 180s per Match: ";
+    float tempFloat = players->playerAvg180s[0];
+    temp2 = QString::number(tempFloat);
+    statsAvg180s.append(temp2);
+    statsAvg180s.append("\n\n");
+
+    statsName = "Name: ";
+    temp = players->playerFirst[1];
+    temp2 = QString::fromStdString(temp);
+    statsName.append(temp2);
+    statsName.append(" ");
+    temp = players->playerLast[1];
+    temp2 = QString::fromStdString(temp);
+    statsName.append(temp2);
+    statsName.append("\t");
+
+    statsAvg180s = "Average 180s per Match: ";
+    tempFloat = players->playerAvg180s[1];
+    temp2 = QString::number(tempFloat);
+    statsAvg180s.append(temp2);
+    statsAvg180s.append("\n");
+
+    stats.append(statsName);
+    stats.append(statsAvg180s);
+    ui->CurrentPlayer->setText(stats);
 }
 
 void AudienceView::setWinPercentagesText()
