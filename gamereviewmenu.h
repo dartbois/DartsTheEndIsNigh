@@ -17,10 +17,9 @@ public:
     ~GameReviewMenu();
     int oGID = 0;
 
-    void GameReviewMenu::FillMenu(int GID);
+    void FillMenu(int GID);
 
 private slots:
-    void on_gameReviewEdit_clicked();
 
     void on_gameReviewCancel_clicked();
 

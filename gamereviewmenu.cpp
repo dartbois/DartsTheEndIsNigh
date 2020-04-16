@@ -1,6 +1,7 @@
 #include "gamereviewmenu.h"
 #include "ui_gamereviewmenu.h"
 #include "datahandler.h"
+#include "sqlhandler.h"
 
 GameReviewMenu::GameReviewMenu(QWidget *parent) :
     QDialog(parent),
@@ -12,18 +13,12 @@ GameReviewMenu::GameReviewMenu(QWidget *parent) :
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
 
     FillMenu(oGID);
-
 }
 
 GameReviewMenu::~GameReviewMenu()
 {
 
     delete ui;
-
-}
-
-void GameReviewMenu::on_gameReviewEdit_clicked()
-{
 
 }
 
@@ -34,22 +29,32 @@ void GameReviewMenu::on_gameReviewCancel_clicked()
 
 void GameReviewMenu::on_EditP1Throws_clicked()
 {
-    editThrowsMenu = new EditThrowsMenu();
+    editThrowsMenu = new EditThrowsMenu(this, oGID, 0);
     editThrowsMenu -> show();
 }
 
 void GameReviewMenu::on_EditP2Throws_clicked()
 {
-    editThrowsMenu = new EditThrowsMenu();
+    editThrowsMenu = new EditThrowsMenu(this, oGID, 1);
     editThrowsMenu -> show();
 }
 
 void GameReviewMenu::on_ChangeWinner_clicked()
 {
+    QString path = QDir::currentPath();
+    path = path + QString("/DartLeague.db");
+    sqlHandler mySql(path);
 
+    QString qwinner = this->ui->Winner->text();
+    int winner = qwinner.toInt();
+
+    mySql.sqlUpdateWinner(oGID, winner);
 }
 
 void GameReviewMenu::FillMenu(int GID){
+    this->ui->ThrowOneList->clear();
+    this->ui->ThrowTwoList->clear();
+
     if (GID != 0){
         DataHandler myD;
         string sGID = to_string(GID);

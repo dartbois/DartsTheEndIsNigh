@@ -52,6 +52,9 @@ public:
     void sqlAddNewGame(int gameID, MatchStartData newGame);
     void sqlUpdateGame(int gameID, int newGID, MatchStartData game);
     void sqlRemoveGame(int gameID);
+    void sqlUpdateP1Throws(int gameID, string newThrows);
+    void sqlUpdateP2Throws(int gameID, string newThrows);
+    void sqlUpdateWinner(int gameID, int winner);
 
 private:
     QSqlDatabase m_db;

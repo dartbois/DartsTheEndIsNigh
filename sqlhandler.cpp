@@ -571,3 +571,41 @@ void sqlHandler::sqlRemoveGame(int gameID){
     query.exec();
     query.first();
 }
+
+//Setters: needs to update throws of a completed game
+void sqlHandler::sqlUpdateP1Throws(int gameID, string newThrows){
+    QSqlQuery query;
+
+    QString qThrows = QString::fromStdString(newThrows);
+
+    query.prepare("UPDATE Games SET [P1Slings] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, qThrows);
+    query.bindValue(1, gameID);
+
+    query.exec();
+    query.first();
+}
+
+void sqlHandler::sqlUpdateP2Throws(int gameID, string newThrows){
+    QSqlQuery query;
+
+    QString qThrows = QString::fromStdString(newThrows);
+
+    query.prepare("UPDATE Games SET [P2Slings] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, qThrows);
+    query.bindValue(1, gameID);
+
+    query.exec();
+    query.first();
+}
+
+void sqlHandler::sqlUpdateWinner(int gameID, int winner){
+    QSqlQuery query;
+
+    query.prepare("UPDATE Games SET [Winner] = ? WHERE [Game ID] = ?");
+    query.bindValue(0, winner);
+    query.bindValue(1, gameID);
+
+    query.exec();
+    query.first();
+}
