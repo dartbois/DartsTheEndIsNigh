@@ -190,11 +190,10 @@ void ScorerView::on_ValadationYes_clicked()
 {
     int winner = 0;
     int slingInt = 0;
-    int scoreCheck = 0;
     QString slingHolder = "";
 
     //code to get values from slings 1, 2, 3
-    if (myP.active == true) { //if player 1 is active
+    if (myP.active == false) { //if player 1 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
@@ -211,9 +210,8 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p1Slings.append("/t");
 
         winner = myM.scoreSubtract(0, slingInt);
-        scoreCheck = myM.currentScore[0];
     }
-    else { //if myP.active is false, player2 is active
+    else { //if myP.active is true, player2 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
@@ -230,7 +228,6 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p2Slings.append("/t");
 
         winner = myM.scoreSubtract(1, slingInt);
-        scoreCheck = myM.currentScore[1];
     }
 
     emit sendValidateTrue(false);    //sending false will unblock the scoring
