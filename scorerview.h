@@ -104,6 +104,9 @@ signals:
     //These signals will be used to send the latest throw string to Audience View
     void sendLatestThrow(QString *latestThrow);
 
+    void sendP1Prediction(QString prediction);
+
+    void sendP2Prediction(QString prediction);
 
 public:
     //various UI elements
