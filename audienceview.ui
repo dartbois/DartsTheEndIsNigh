@@ -49,26 +49,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="MatchStats">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="BothP1AndP2Stats">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QLabel" name="PersonalStats">
         <property name="frameShape">
          <enum>QFrame::Box</enum>

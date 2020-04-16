@@ -32,20 +32,20 @@ public slots:
     //The setText slots show the stats on the bottom pane of the audience view
     void setPlayerOneStatsText();
     void setPlayerTwoStatsText();
-    void setBothP1AndP2StatsText();
+    //void setBothP1AndP2StatsText();
     void setCurrentPlayerText();
     void setNumberOf180sText();
     void setWinPercentagesText();
     void setPersonalStatsText();
-    void setMatchStatsText();
+    //void setMatchStatsText();
     void setRankedStatsText();
     void setLatestThrowText(QString *latestThrow);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
-    void undoMatchStatsText();
+    //void undoMatchStatsText();
     void undoPlayerTwoStatsText();
-    void undoBothP1AndP2StatsText();
+    //void undoBothP1AndP2StatsText();
     void undoCurrentPlayerText();
     void undoNumberOf180sText();
     void undoWinPercentagesText();
@@ -57,12 +57,12 @@ public:
    //set of labels controlling stats displays in the UI
    QLabel *StatisticsDisplay;
    QLabel *Player2Stats;
-   QLabel *BothP1AndP2Stats;
+   //QLabel *BothP1AndP2Stats;
    QLabel *CurrentPlayer;
    QLabel *NumberOf180s;
    QLabel *WinPercentages;
    QLabel *PersonalStats;
-   QLabel *MatchStats;
+   //QLabel *MatchStats;
    QLabel *RankedStats;
    player *players;
 

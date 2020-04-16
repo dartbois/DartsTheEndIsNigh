@@ -123,24 +123,10 @@
       <enum>QFrame::Plain</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="5" column="2">
-       <widget class="QCheckBox" name="MatchStats">
-        <property name="text">
-         <string>Match</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="2">
        <widget class="QCheckBox" name="PlayerTwoStats">
         <property name="text">
          <string>P2 Stats</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="3">
-       <widget class="QCheckBox" name="CurrentPlayerStats">
-        <property name="text">
-         <string>Current Player</string>
         </property>
        </widget>
       </item>
@@ -154,14 +140,7 @@
       <item row="4" column="3">
        <widget class="QCheckBox" name="PersonalStats">
         <property name="text">
-         <string>Pesonal Stats</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="4">
-       <widget class="QCheckBox" name="RankedStats">
-        <property name="text">
-         <string>Ranked</string>
+         <string>Personal Stats</string>
         </property>
        </widget>
       </item>
@@ -172,24 +151,31 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="5">
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="PlayerOneStats">
+        <property name="text">
+         <string>P1 Stats</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
        <widget class="QCheckBox" name="NumberOf180s">
         <property name="text">
          <string>180's</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QCheckBox" name="PlayerOneAndPlayerTwoStats">
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="CurrentPlayerStats">
         <property name="text">
-         <string>Both Stats</string>
+         <string>Current Player</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="PlayerOneStats">
+      <item row="5" column="3">
+       <widget class="QCheckBox" name="RankedStats">
         <property name="text">
-         <string>P1 Stats</string>
+         <string>Ranked</string>
         </property>
        </widget>
       </item>
@@ -222,16 +208,6 @@
      </property>
     </widget>
    </item>
-   <item row="7" column="0">
-    <widget class="Line" name="line_8">
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="12" rowspan="2">
     <widget class="Line" name="line_5">
      <property name="baseSize">
@@ -246,6 +222,16 @@
      <property name="lineWidth">
       <number>2</number>
      </property>
+     <property name="midLineWidth">
+      <number>2</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="Line" name="line_8">
      <property name="midLineWidth">
       <number>2</number>
      </property>
@@ -278,6 +264,19 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2" rowspan="3" colspan="17">
+    <widget class="Line" name="line_2">
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="midLineWidth">
+      <number>2</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
@@ -334,19 +333,6 @@
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="2" rowspan="3" colspan="17">
-    <widget class="Line" name="line_2">
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="midLineWidth">
-      <number>2</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
