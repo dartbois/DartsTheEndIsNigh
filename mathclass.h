@@ -18,7 +18,6 @@ public:
     int scoreSubtract(int player, int throwScore); //subtracts score from total, player is 0 or 1
     string dataGet(string request); //Facilitates data transmission
     bool scoreValidator(int remScore);
-    void newLeg();
     int currentScore[2]; //current score
     int legWins[2];
     int legTotal;

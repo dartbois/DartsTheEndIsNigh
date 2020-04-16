@@ -6,7 +6,7 @@ mathClass::mathClass(int scoreStart)
 {
     currentScore[0] = scoreStart, currentScore[1] = scoreStart;
     legWins[0] = 0;
-    legWins[1] = 1;
+    legWins[1] = 0;
     matchWins[0] = 0;
     matchWins[1] = 0;
     matchesHeld = 0;
@@ -15,7 +15,7 @@ mathClass::mathClass(int scoreStart)
 
 mathClass::mathClass(){
     legWins[0] = 0;
-    legWins[1] = 1;
+    legWins[1] = 0;
     matchWins[0] = 0;
     matchWins[1] = 0;
     matchesHeld = 0;
@@ -107,10 +107,4 @@ string mathClass::dataGet(string request) {
         answer = to_string(this->currentScore[1]);
     }
     return answer;
-}
-
-
-void mathClass::newLeg(){
-    currentScore[0] = currentScore[1] = startScore;
-
 }
