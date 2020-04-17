@@ -153,6 +153,12 @@ private slots:
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
 
+    void on_zeroSling1_clicked();
+
+    void on_zeroSling2_clicked();
+
+    void on_zeroSling3_clicked();
+
 public:
     mathClass myM;
     //int beginScore;

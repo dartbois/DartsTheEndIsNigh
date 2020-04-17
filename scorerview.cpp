@@ -423,3 +423,21 @@ void ScorerView::legWinner(bool winnerIndex) {
         }
     }
 }
+
+void ScorerView::on_zeroSling1_clicked()
+{
+    this->SlingOneText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling2_clicked()
+{
+    this->SlingTwoText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling3_clicked()
+{
+    this->SlingThreeText->setText(QString::number(0));
+    this->repaint();
+}
