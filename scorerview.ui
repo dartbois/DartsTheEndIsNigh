@@ -277,19 +277,6 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="15" colspan="4">
-    <widget class="QTableWidget" name="tableWidget">
-     <property name="maximumSize">
-      <size>
-       <width>350</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="16">
     <widget class="QLabel" name="LegNumber">
      <property name="text">
@@ -372,11 +359,24 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="15" colspan="4">
+    <widget class="QListWidget" name="listWidget">
+     <property name="maximumSize">
+      <size>
+       <width>350</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+    </widget>
+   </item>
   </layout>
   <zorder>line_2</zorder>
   <zorder>line_8</zorder>
   <zorder>line_6</zorder>
-  <zorder>tableWidget</zorder>
+  <zorder>listWidget</zorder>
   <zorder>line_5</zorder>
   <zorder>frame_2</zorder>
   <zorder>frame</zorder>

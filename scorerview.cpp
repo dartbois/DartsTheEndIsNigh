@@ -310,7 +310,9 @@ void ScorerView::on_ValadationYes_clicked()
     //Now, set the labels' text
     emit sendP1CurrentScore(myM.currentScore[0]);
     emit sendP2CurrentScore(myM.currentScore[1]);
-    emit sendCurrentPlayerStats();
+    if (ui->CurrentPlayerStats->isChecked()){
+        emit sendCurrentPlayerStats();
+    }
     this->repaint();
 }
 
