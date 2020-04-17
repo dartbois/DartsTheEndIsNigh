@@ -26,7 +26,7 @@ public:
     //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
-  //  int legNumber;
+    //int legNumber;
     //int matchNumber;
 
 public slots:
@@ -55,6 +55,14 @@ public slots:
 
     void set_SlingThreeText(int score);
 
+    void setPlayerOneScoreText(int score);
+
+    void setPlayerTwoScoreText(int score);
+
+    void undoP1CurrentScore();
+
+    void undoP2CurrentScore();
+
     //gets a MatchStartData from GameSelectionMenu.
     void getMSD(MatchStartData myMSD);
 
@@ -79,6 +87,10 @@ signals:
 
     void sendNumberOf180s();
 
+    void sendP1CurrentScore(int score);
+
+    void sendP2CurrentScore(int score);
+
     //These signals will clear the stats from the audience window
     void sendRankedStatsUndo();
 
@@ -97,6 +109,10 @@ signals:
     //void sendPlayerOneAndPlayerTwoStatsUndo();
 
     void sendCurrentPlayerStatsUndo();
+
+    void sendP1CurrentScoreUndo();
+
+    void sendP2CurrentScoreUndo();
 
     //These signals will be used for validation of the scores
     void sendValidateTrue(bool unblockScore);
@@ -127,6 +143,8 @@ public:
     QLabel *lastThrowLabel;
     QString *currentThrow;
     QString *lastThrow;
+    QString *currentScoreP1;
+    QString *currentScoreP2;
 
 private slots:
     void on_ValadationYes_clicked();
@@ -135,11 +153,17 @@ private slots:
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
 
+    void on_zeroSling1_clicked();
+
+    void on_zeroSling2_clicked();
+
+    void on_zeroSling3_clicked();
+
 public:
     mathClass myM;
     //int beginScore;
     player myP;
-    void legWinner(bool playerID);
+    void legWinner(bool winnerIndex);
     AudienceView* m_audienceWindow;
 };
 

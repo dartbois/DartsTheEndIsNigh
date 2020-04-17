@@ -8,8 +8,6 @@ player::player(int playerID, int playerID2)
     p2Slings = ""; //player 2's slings
     playerIDs[0] = playerID;
     playerIDs[1] = playerID2;
- //   matchesHeld = 0;
-   // ties = 0;
 
     if (playerID == 0 && playerID2 == 0){
         for (int i = 0; i < 2; i++){
@@ -101,8 +99,8 @@ player::player(int playerID, int playerID2)
         }
 
         playerMatch180s[i] = 0;
-//        playerLegsWon[i] = 0;
-  //      playerMatchesWon[i] = 0;
+        //playerLegsWon[i] = 0;
+        //playerMatchesWon[i] = 0;
     }
 
     return;
@@ -117,9 +115,7 @@ void player::postInit(int playerID, int playerID2)
     active = false;
     playerIDs[0] = playerID;
     playerIDs[1] = playerID2;
-//    matchesHeld = 0;
-  //  ties = 0;
-    //legTotal = 0;
+
     if (playerID == 0 && playerID2 == 0){
         for (int i = 0; i < 2; i++){
             playerFirst[i] = "";
@@ -210,8 +206,8 @@ void player::postInit(int playerID, int playerID2)
         }
 
         playerMatch180s[i] = 0;
-//        playerLegsWon[i] = 0;
-  //      playerMatchesWon[i] = 0;
+        //playerLegsWon[i] = 0;
+        //playerMatchesWon[i] = 0;
     }
 
     return;
@@ -312,7 +308,6 @@ string player::dataGet(string request) {
     else if (request == "playerWinPercent"){
         myAns = to_string(this->playerWinPercent[1]);
     }
-
 
     return myAns;
 }

@@ -37,6 +37,12 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
    connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
 
+   //connect the current score labels on this scorer window, and then connect the current score to the audience view as well
+   connect(this, &ScorerView::sendP1CurrentScore, this, &ScorerView::setPlayerOneScoreText);
+   connect(this, &ScorerView::sendP2CurrentScore, this, &ScorerView::setPlayerTwoScoreText);
+   connect(this, &ScorerView::sendP1CurrentScore, audienceWindow, &AudienceView::setPlayerOneScoreText);
+   connect(this, &ScorerView::sendP2CurrentScore, audienceWindow, &AudienceView::setPlayerTwoScoreText);
+
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
    //connect(this, &ScorerView::sendMatchStatsUndo, audienceWindow, &AudienceView::undoMatchStatsText);
@@ -47,7 +53,10 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
    connect(this, &ScorerView::sendPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoPlayerTwoStatsText);
-
+   connect(this, &ScorerView::sendP1CurrentScoreUndo, this, &ScorerView::undoP1CurrentScore);
+   connect(this, &ScorerView::sendP2CurrentScoreUndo, this, &ScorerView::undoP2CurrentScore);
+   connect(this, &ScorerView::sendP1CurrentScoreUndo, audienceWindow, &AudienceView::undoP1CurrentScore);
+   connect(this, &ScorerView::sendP2CurrentScoreUndo, audienceWindow, &AudienceView::undoP2CurrentScore);
 
 
 
@@ -194,48 +203,61 @@ void ScorerView::on_ValadationYes_clicked()
 {
     int winner = 0;
     int slingInt = 0;
-    QString slingHolder = "";
+    QString slingHolder1 = "";
+    QString slingHolder2 = "";
+    QString slingHolder3 = "";
 
     //code to get values from slings 1, 2, 3
     if (myP.active == false) { //if player 1 is active
-        slingHolder = SlingOneText->text();
-        slingInt = slingHolder.toInt();
-        myP.p1Slings.append(slingHolder);
+        slingHolder1 = SlingOneText->text();
+        slingInt = slingHolder1.toInt();
+        myP.p1Slings.append(slingHolder1);
         myP.p1Slings.append("-");
 
-        slingHolder = SlingTwoText->text();
-        slingInt += slingHolder.toInt();
-        myP.p1Slings.append(slingHolder);
+        slingHolder2 = SlingTwoText->text();
+        slingInt += slingHolder2.toInt();
+        myP.p1Slings.append(slingHolder2);
         myP.p1Slings.append("-");
 
-        slingHolder = SlingThreeText->text();
-        slingInt += slingHolder.toInt();
-        myP.p1Slings.append(slingHolder);
+        slingHolder3 = SlingThreeText->text();
+        slingInt += slingHolder3.toInt();
+        myP.p1Slings.append(slingHolder3);
         myP.p1Slings.append("/t");
+
         if (slingInt == 180) {
             myP.playerMatch180s[0] = myP.playerMatch180s[0] + 1;
         }
-        winner = myM.scoreSubtract(0, slingInt);
+        if (myM.currentScore[0] - slingInt != 1) {
+            winner = myM.scoreSubtract(0, slingInt);
+        }
     }
     else { //if myP.active is true, player2 is active
-        slingHolder = SlingOneText->text();
-        slingInt = slingHolder.toInt();
-        myP.p2Slings.append(slingHolder);
+        slingHolder1 = SlingOneText->text();
+        slingInt = slingHolder1.toInt();
+        myP.p2Slings.append(slingHolder1);
         myP.p2Slings.append("-");
 
-        slingHolder = SlingTwoText->text();
-        slingInt += slingHolder.toInt();
-        myP.p2Slings.append(slingHolder);
+        slingHolder2 = SlingTwoText->text();
+        slingInt += slingHolder2.toInt();
+        myP.p2Slings.append(slingHolder2);
         myP.p2Slings.append("-");
 
-        slingHolder = SlingThreeText->text();
-        slingInt += slingHolder.toInt();
-        myP.p2Slings.append(slingHolder);
+        slingHolder3 = SlingThreeText->text();
+        slingInt += slingHolder3.toInt();
+        myP.p2Slings.append(slingHolder3);
         myP.p2Slings.append("/t");
+
         if (slingInt == 180) {
             myP.playerMatch180s[1] = myP.playerMatch180s[1] + 1;
         }
-        winner = myM.scoreSubtract(1, slingInt);
+        //eyeyeyeyey
+    //  if (slingInt == myM.currentScore[1]) {
+      //    if ()
+        //}
+        if (myM.currentScore[1] - slingInt != 1) {
+            winner = myM.scoreSubtract(1, slingInt);
+        }
+
     }
 
     emit sendValidateTrue(false);    //sending false will unblock the scoring
@@ -268,16 +290,15 @@ void ScorerView::on_ValadationYes_clicked()
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
+        qDebug() << "The bool is: " << myP.active;
     }
 
     int currentPlayerInt = 0;
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         currentPlayerInt = 0;
     }
-    else
-    {
+    else{
         currentPlayerInt = 1;
     }
 
@@ -285,15 +306,25 @@ void ScorerView::on_ValadationYes_clicked()
 
     currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         emit sendP1Prediction(currentPlayerPrediction);
     }
-    else
-    {
+    else{
          emit sendP2Prediction(currentPlayerPrediction);
     }
 
+    //Clearing the labels forces them to update the text
+    emit sendP1CurrentScoreUndo();
+    emit sendP2CurrentScoreUndo();
+    emit sendCurrentPlayerStatsUndo();
+
+    //Now, set the labels' text
+    emit sendP1CurrentScore(myM.currentScore[0]);
+    emit sendP2CurrentScore(myM.currentScore[1]);
+    if (ui->CurrentPlayerStats->isChecked()){
+        emit sendCurrentPlayerStats();
+    }
+    this->repaint();
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -321,6 +352,26 @@ void ScorerView::on_SlineThree_linkActivated(const QString &link)
 
 }
 
+void ScorerView::setPlayerOneScoreText(int score)
+{
+    this->ui->PlayerOneScore->setText(QString::number(score));
+}
+
+void ScorerView::setPlayerTwoScoreText(int score)
+{
+    this->ui->PlayerTwoScore->setText(QString::number(score));
+}
+
+void ScorerView::undoP1CurrentScore()
+{
+    this->ui->PlayerOneScore->clear();
+}
+
+void ScorerView::undoP2CurrentScore()
+{
+    this->ui->PlayerTwoScore->clear();
+}
+
 void ScorerView::getMSD(MatchStartData myMSD){
     myM.currentScore[0] = myMSD.gameStartScore;
     myM.currentScore[1] = myMSD.gameStartScore;
@@ -328,6 +379,14 @@ void ScorerView::getMSD(MatchStartData myMSD){
     myM.legTotal = myMSD.gameLegs;
     myM.matchTotal = myMSD.gameMatches;
     myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
+
+    //Clearing the labels forces them to update the text
+    emit sendP1CurrentScoreUndo();
+    emit sendP2CurrentScoreUndo();
+
+    //Now, set the labels' text
+    emit sendP1CurrentScore(myM.currentScore[0]);
+    emit sendP2CurrentScore(myM.currentScore[1]);
 }
 
 void ScorerView::legWinner(bool winnerIndex) {
@@ -342,7 +401,8 @@ void ScorerView::legWinner(bool winnerIndex) {
         myM.legWins[0] += 1;
     }
 
-
+    myM.currentScore[0] = myM.startScore;
+    myM.currentScore[1] = myM.startScore;
     myP.p1Slings.append("\n");
     myP.p2Slings.append("\n");
 
@@ -373,4 +433,22 @@ void ScorerView::legWinner(bool winnerIndex) {
             //we will boot up a sqlhandler and YEET THAT INFO INTO THE DB.
         }
     }
+}
+
+void ScorerView::on_zeroSling1_clicked()
+{
+    this->SlingOneText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling2_clicked()
+{
+    this->SlingTwoText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling3_clicked()
+{
+    this->SlingThreeText->setText(QString::number(0));
+    this->repaint();
 }
