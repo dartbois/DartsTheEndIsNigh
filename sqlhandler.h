@@ -44,7 +44,7 @@ public:
     string sqlGetGameList();
 
     void sqlSetPlayerFinal(int playerID, player Player);
-    void sqlSetGameFinal(int gameID, MatchStartData game);
+    void sqlSetGameFinal(int gameID, int winnerID, string P1Slings, string P2Slings);
 
     void sqlAddNewPlayer(int playerID, player Player);
     void sqlUpdatePlayer(int playerID, int newPID, player Player);

@@ -20,25 +20,27 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     SlingThreeText = ui->SlineThree;
     currentThrowLabel = ui->CurrentThrowLabel;
     lastThrowLabel = ui->LastThrowLabel;
+    audienceWindow->players = &myP;
+    m_audienceWindow = audienceWindow;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
    connect(this, &ScorerView::sendPlayerTwoStats, audienceWindow, &AudienceView::setPlayerTwoStatsText);
-   connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStats, audienceWindow, &AudienceView::setBothP1AndP2StatsText);
+   //connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStats, audienceWindow, &AudienceView::setBothP1AndP2StatsText);
    connect(this, &ScorerView::sendCurrentPlayerStats, audienceWindow, &AudienceView::setCurrentPlayerText);
    connect(this, &ScorerView::sendNumberOf180s, audienceWindow, &AudienceView::setNumberOf180sText);
    connect(this, &ScorerView::sendWinPercentages, audienceWindow, &AudienceView::setWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStats, audienceWindow, &AudienceView::setPersonalStatsText);
-   connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
+   //connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
    connect(this, &ScorerView::sendRankedStats, audienceWindow, &AudienceView::setRankedStatsText);
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
 
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
-   connect(this, &ScorerView::sendMatchStatsUndo, audienceWindow, &AudienceView::undoMatchStatsText);
+   //connect(this, &ScorerView::sendMatchStatsUndo, audienceWindow, &AudienceView::undoMatchStatsText);
    connect(this, &ScorerView::sendPlayerOneStatsUndo, audienceWindow, &AudienceView::undoPlayerOneStatsText);
    connect(this, &ScorerView::sendCurrentPlayerStatsUndo, audienceWindow, &AudienceView::undoCurrentPlayerText);
-   connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoBothP1AndP2StatsText);
+   //connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoBothP1AndP2StatsText);
    connect(this, &ScorerView::sendNumberOf180sUndo, audienceWindow, &AudienceView::undoNumberOf180sText);
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
@@ -78,7 +80,7 @@ void ScorerView::on_PlayerTwoStats_clicked()
     }
 }
 
-void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
+/*void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
 {
     if(ui->PlayerOneAndPlayerTwoStats->isChecked())
     {
@@ -88,7 +90,7 @@ void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
     {
         emit sendPlayerOneAndPlayerTwoStatsUndo();
     }
-}
+}*/
 
 void ScorerView::on_CurrentPlayerStats_clicked()
 {
@@ -138,7 +140,7 @@ void ScorerView::on_PersonalStats_clicked()
     }
 }
 
-void ScorerView::on_MatchStats_clicked()
+/*void ScorerView::on_MatchStats_clicked()
 {
     if(ui->MatchStats->isChecked())
     {
@@ -148,7 +150,7 @@ void ScorerView::on_MatchStats_clicked()
     {
         emit sendMatchStatsUndo();
     }
-}
+}*/
 
 void ScorerView::on_RankedStats_clicked()
 {
