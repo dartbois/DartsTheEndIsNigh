@@ -135,7 +135,7 @@ public:
     mathClass myM;
     int beginScore;
     player myP;
-    void legWinner(int playerID);
+    void legWinner(bool playerID);
 };
 
 #endif // SCORERVIEW_H

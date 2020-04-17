@@ -248,7 +248,12 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
-        legWinner(winner);
+        if (winner == 0) {
+            legWinner(myP.active);
+        }
+        else if (winner == 1) {
+            legWinner(!(myP.active));
+        }
     }
     else {
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
@@ -291,10 +296,18 @@ void ScorerView::getMSD(MatchStartData myMSD){
     myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
 }
 
-void ScorerView::legWinner(int winnerIndex) {
+void ScorerView::legWinner(bool winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
-    myM.legWins[winnerIndex] += 1;
+
+    if (winnerIndex == false) {
+        myM.legWins[0] = myM.legWins[0] + 1;
+    }
+    else if (winnerIndex == true){
+        myM.legWins[1] = myM.legWins[1] + 1;
+    }
+
+
     myP.p1Slings.append("\n");
     myP.p2Slings.append("\n");
 
