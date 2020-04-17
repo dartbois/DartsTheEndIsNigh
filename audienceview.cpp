@@ -494,6 +494,26 @@ void  AudienceView::setP2Prediction(QString prediction)
     this -> ui -> PlayerTwoPredictions -> setText(prediction);
 }
 
+void AudienceView::setPlayerOneScoreText(int score)
+{
+    this->ui->PlayerOneCurrentScore->setText(QString::number(score));
+}
+
+void AudienceView::setPlayerTwoScoreText(int score)
+{
+    this->ui->PlayerTwoCurrentScore->setText(QString::number(score));
+}
+
+void AudienceView::undoP1CurrentScore()
+{
+    this->ui->PlayerOneCurrentScore->clear();
+}
+
+void AudienceView::undoP2CurrentScore()
+{
+    this->ui->PlayerTwoCurrentScore->clear();
+}
+
 void AudienceView::undoRankedText()         //Experimental
 {
     ui->RankedStats->clear();

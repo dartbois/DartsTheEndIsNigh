@@ -42,6 +42,8 @@ public slots:
     void setLatestThrowText(QString *latestThrow);
     void setP1Prediction(QString prediction);
     void setP2Prediction(QString prediction);
+    void setPlayerOneScoreText(int score);
+    void setPlayerTwoScoreText(int score);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
@@ -53,6 +55,8 @@ public slots:
     void undoWinPercentagesText();
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
+    void undoP1CurrentScore();
+    void undoP2CurrentScore();
 public:
    //initializes the UI
    Ui::AudienceView *ui;
