@@ -379,12 +379,54 @@ string sqlHandler::sqlGetGameList() {
 
 //Setter: needs to set final player info into SQLite
 void sqlHandler::sqlSetPlayerFinal(int playerID, player Player) {
+    QSqlQuery query;
 
+    int rank, lastwin, tshi, tslo, played, won;
+    float a180, a180s, athrow, athrows;
 
+    rank = Player.playerRanking[0];
+    a180 = Player.playerAvg180s[0];
+    a180s = Player.playerAvg180Season[0];
+    lastwin = Player.playerLastWin[0];
+    athrow = Player.playerAvgThrow[0];
+    athrows = Player.playerAvg180Season[0];
+    tshi = Player.playerTurnScoreHi[0];
+    tslo = Player.playerTurnScoreLo[0];
+    played = Player.playerGamesPlayed[0];
+    won = Player.playerGamesWon[0];
+
+    query.prepare("UPDATE players SET Ranking = ?, [Avg 180s] = ?, [Avg 180s (Season)] = ?, [Last Game Win] = ?, [Avg Throw Score] = ?, [Avg Throw Score (Season)] = ?, [Turn Score High] = ?, [Turn Score Low] = ?, [Num Games Played] = ?, [Num Games Won] = ? WHERE [Player ID] = ?");
+    query.bindValue(0, rank);
+    query.bindValue(1, a180);
+    query.bindValue(2, a180s);
+    query.bindValue(3, lastwin);
+    query.bindValue(4, athrow);
+    query.bindValue(5, athrows);
+    query.bindValue(6, tshi);
+    query.bindValue(7, tslo);
+    query.bindValue(8, played);
+    query.bindValue(9, won);
+    query.bindValue(10, playerID);
+
+    query.exec();
+    query.first();
 }
 
 //Setter: needs to update game db stats after game is complete
-void sqlHandler::sqlSetGameFinal(int gameID, MatchStartData game){
+void sqlHandler::sqlSetGameFinal(int gameID, int winnerID, string P1Slings, string P2Slings){
+    QSqlQuery query;
+
+    QString QP1Slings = QString::fromStdString(P1Slings);
+    QString QP2Slings = QString::fromStdString(P2Slings);
+
+    query.prepare("UPDATE Games SET [Winner] = ?, [P1Slings] = ?, [P2Slings] = ?, [Completed] = TRUE, WHERE [Game ID] = ?");
+    query.bindValue(0, winnerID);
+    query.bindValue(1, QP1Slings);
+    query.bindValue(2, QP2Slings);
+    query.bindValue(3, gameID);
+
+    query.exec();
+    query.first();
 
 }
 

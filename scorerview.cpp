@@ -213,6 +213,9 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("/t");
 
+        if (slingInt == 180) {
+            myP.playerMatch180s[0] = myP.playerMatch180s[0] + 1;
+        }
         winner = myM.scoreSubtract(0, slingInt);
     }
     else { //if myP.active is true, player2 is active
@@ -231,6 +234,9 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("/t");
 
+        if (slingInt == 180) {
+            myP.playerMatch180s[1] = myP.playerMatch180s[1] + 1;
+        }
         winner = myM.scoreSubtract(1, slingInt);
     }
 
@@ -252,28 +258,27 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
-        if (winner ==0){
-            legWinner(!(myP.active));
+        if (winner == 0){
+            legWinner(myP.active);
         }
         else if (winner == 1){
-            legWinner(winner);
+            legWinner(!(myP.active));
         }
-        legWinner(winner);
+        //legWinner(winner);
     }
     else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
+        qDebug() << "The bool is: " << myP.active;
     }
 
     int currentPlayerInt = 0;
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         currentPlayerInt = 0;
     }
-    else
-    {
+    else{
         currentPlayerInt = 1;
     }
 
@@ -281,15 +286,12 @@ void ScorerView::on_ValadationYes_clicked()
 
     currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         emit sendP1Prediction(currentPlayerPrediction);
     }
-    else
-    {
+    else{
          emit sendP2Prediction(currentPlayerPrediction);
     }
-
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -326,7 +328,7 @@ void ScorerView::getMSD(MatchStartData myMSD){
     myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
 }
 
-void ScorerView::legWinner(int winnerIndex) {
+void ScorerView::legWinner(bool winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
     if(winnerIndex == false)
@@ -335,7 +337,7 @@ void ScorerView::legWinner(int winnerIndex) {
     }
     else if (winnerIndex == true)
     {
-        myM.legWins[winnerIndex] += 1;
+        myM.legWins[0] += 1;
     }
 
 

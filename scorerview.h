@@ -26,8 +26,8 @@ public:
     //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
-    int legNumber;
-    int matchNumber;
+    //int legNumber;
+    //int matchNumber;
 
 public slots:
     //these react to the user interacting with the UI.
@@ -137,9 +137,9 @@ private slots:
 
 public:
     mathClass myM;
-    int beginScore;
+    //int beginScore;
     player myP;
-    void legWinner(int playerID);
+    void legWinner(bool winnerIndex);
     AudienceView* m_audienceWindow;
 };
 

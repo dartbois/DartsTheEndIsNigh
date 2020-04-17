@@ -128,10 +128,10 @@
     </widget>
    </item>
    <item row="5" column="5">
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QListWidget" name="listWidget">
      <property name="maximumSize">
       <size>
-       <width>400</width>
+       <width>350</width>
        <height>16777215</height>
       </size>
      </property>
@@ -140,72 +140,6 @@
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0" colspan="2">
-    <widget class="QFrame" name="frame_2">
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="1" alignment="Qt::AlignLeft|Qt::AlignTop">
-       <widget class="QLabel" name="PlayerTwoLabel">
-        <property name="text">
-         <string>Player 2:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-       <widget class="QLabel" name="label_2">
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#940002;&quot;&gt;Latest Throws :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignVCenter">
-       <widget class="QLabel" name="PlayerOneLabel">
-        <property name="text">
-         <string>Player 1:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" colspan="2" alignment="Qt::AlignVCenter">
-       <widget class="QLabel" name="PlayerOneLastThrowLabel">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2" colspan="2" alignment="Qt::AlignTop">
-       <widget class="QLabel" name="PlayerTwoLastThrowLabel">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="5">
-    <widget class="QLabel" name="label_8">
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>../../../Pictures/RaidLOGO.PNG</pixmap>
      </property>
     </widget>
    </item>
@@ -291,12 +225,89 @@
      </layout>
     </widget>
    </item>
+   <item row="5" column="0" colspan="2">
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="1" column="1" alignment="Qt::AlignLeft|Qt::AlignTop">
+       <widget class="QLabel" name="PlayerTwoLabel">
+        <property name="text">
+         <string>Player 2:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+       <widget class="QLabel" name="label_2">
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:600; color:#940002;&quot;&gt;Latest Throws :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" alignment="Qt::AlignLeft|Qt::AlignVCenter">
+       <widget class="QLabel" name="PlayerOneLabel">
+        <property name="text">
+         <string>Player 1:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" colspan="2" alignment="Qt::AlignVCenter">
+       <widget class="QLabel" name="PlayerOneLastThrowLabel">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" colspan="2" alignment="Qt::AlignTop">
+       <widget class="QLabel" name="PlayerTwoLastThrowLabel">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="5" column="6">
+    <widget class="QListWidget" name="listWidget_2">
+     <property name="maximumSize">
+      <size>
+       <width>350</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap>../../../Pictures/RaidLOGO.PNG</pixmap>
+     </property>
+    </widget>
+   </item>
   </layout>
   <zorder>frame</zorder>
   <zorder>frame_2</zorder>
-  <zorder>tableWidget</zorder>
-  <zorder>label_8</zorder>
+  <zorder>listWidget</zorder>
   <zorder>frame_3</zorder>
+  <zorder>listWidget_2</zorder>
+  <zorder>label_8</zorder>
  </widget>
  <resources/>
  <connections/>
