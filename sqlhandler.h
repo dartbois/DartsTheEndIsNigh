@@ -36,6 +36,9 @@ public:
     int sqlGetGameLegs(int gameID);
     int sqlGetGameP1(int gameID);
     int sqlGetGameP2(int gameID);
+    int sqlGetWinner(int gameID);
+    string sqlGetP1Slings(int gameID);
+    string sqlGetP2Slings(int gameID);
 
     string sqlGetPlayerList();
     string sqlGetGameList();
@@ -49,6 +52,9 @@ public:
     void sqlAddNewGame(int gameID, MatchStartData newGame);
     void sqlUpdateGame(int gameID, int newGID, MatchStartData game);
     void sqlRemoveGame(int gameID);
+    void sqlUpdateP1Throws(int gameID, string newThrows);
+    void sqlUpdateP2Throws(int gameID, string newThrows);
+    void sqlUpdateWinner(int gameID, int winner);
 
 private:
     QSqlDatabase m_db;

@@ -31,8 +31,11 @@ public:
     float playerWinPercent[2];
 
     int playerMatch180s[2];
-    int playerMatchesWon[2];
-    int playerLegsWon[2];
+//    int playerMatchesWon[2];
+  //  int playerLegsWon[2];
+    //int matchesHeld;
+   // int ties;
+    //int legTotal;
 
     bool active;
 

@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QLabel>
+#include "player.h"
 
 //this is a UI class
 //This class controls the window the audience would see.
@@ -31,20 +32,22 @@ public slots:
     //The setText slots show the stats on the bottom pane of the audience view
     void setPlayerOneStatsText();
     void setPlayerTwoStatsText();
-    void setBothP1AndP2StatsText();
+    //void setBothP1AndP2StatsText();
     void setCurrentPlayerText();
     void setNumberOf180sText();
     void setWinPercentagesText();
     void setPersonalStatsText();
-    void setMatchStatsText();
+    //void setMatchStatsText();
     void setRankedStatsText();
     void setLatestThrowText(QString *latestThrow);
+    void setP1Prediction(QString prediction);
+    void setP2Prediction(QString prediction);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
-    void undoMatchStatsText();
+    //void undoMatchStatsText();
     void undoPlayerTwoStatsText();
-    void undoBothP1AndP2StatsText();
+    //void undoBothP1AndP2StatsText();
     void undoCurrentPlayerText();
     void undoNumberOf180sText();
     void undoWinPercentagesText();
@@ -56,25 +59,25 @@ public:
    //set of labels controlling stats displays in the UI
    QLabel *StatisticsDisplay;
    QLabel *Player2Stats;
-   QLabel *BothP1AndP2Stats;
+   //QLabel *BothP1AndP2Stats;
    QLabel *CurrentPlayer;
    QLabel *NumberOf180s;
    QLabel *WinPercentages;
    QLabel *PersonalStats;
-   QLabel *MatchStats;
+   //QLabel *MatchStats;
    QLabel *RankedStats;
-
+   player *players;
 
 private slots:
    //when a button is checked in scorerview,
    //these functions make audienceview respond.
    void on_Player2Stats_linkActivated(const QString &link);
-   void on_BothP1AndP2Stats_linkActivated(const QString &link);
+   //void on_BothP1AndP2Stats_linkActivated(const QString &link);
    void on_CurrentPlayer_linkActivated(const QString &link);
    void on_NumberOf180s_linkActivated(const QString &link);
    void on_WinPercentages_linkActivated(const QString &link);
    void on_PersonalStats_linkActivated(const QString &link);
-   void on_MatchStats_linkActivated(const QString &link);
+   //void on_MatchStats_linkActivated(const QString &link);
    void on_RankedStats_linkActivated(const QString &link);
 };
 

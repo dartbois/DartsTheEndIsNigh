@@ -26,8 +26,8 @@ public:
     //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
-    int legNumber;
-    int matchNumber;
+  //  int legNumber;
+    //int matchNumber;
 
 public slots:
     //these react to the user interacting with the UI.
@@ -35,13 +35,13 @@ public slots:
 
     void on_PlayerTwoStats_clicked();
 
-    void on_PlayerOneAndPlayerTwoStats_clicked();
+    //void on_PlayerOneAndPlayerTwoStats_clicked();
 
     void on_CurrentPlayerStats_clicked();
 
     void on_RankedStats_clicked();
 
-    void on_MatchStats_clicked();
+    //void on_MatchStats_clicked();
 
     void on_PersonalStats_clicked();
 
@@ -65,13 +65,13 @@ signals:
 
     void sendPlayerTwoStats();
 
-    void sendPlayerOneAndPlayerTwoStats();
+    //void sendPlayerOneAndPlayerTwoStats();
 
     void sendCurrentPlayerStats();
 
     void sendRankedStats();
 
-    void sendMatchStats();
+    //void sendMatchStats();
 
     void sendPersonalStats();
 
@@ -82,7 +82,7 @@ signals:
     //These signals will clear the stats from the audience window
     void sendRankedStatsUndo();
 
-    void sendMatchStatsUndo();
+    //void sendMatchStatsUndo();
 
     void sendPersonalStatsUndo();
 
@@ -94,7 +94,7 @@ signals:
 
     void sendPlayerTwoStatsUndo();
 
-    void sendPlayerOneAndPlayerTwoStatsUndo();
+    //void sendPlayerOneAndPlayerTwoStatsUndo();
 
     void sendCurrentPlayerStatsUndo();
 
@@ -104,17 +104,21 @@ signals:
     //These signals will be used to send the latest throw string to Audience View
     void sendLatestThrow(QString *latestThrow);
 
+    void sendP1Prediction(QString prediction);
+
+    void sendP2Prediction(QString prediction);
+
 public:
     //various UI elements
     Ui::ScorerView *ui;
     QLabel *StatisticsDisplay;
     QLabel *Player2Stats;
-    QLabel *BothP1AndP2Stats;
+    //QLabel *BothP1AndP2Stats;
     QLabel *CurrentPlayer;
     QLabel *NumberOf180s;
     QLabel *WinPercentages;
     QLabel *PersonalStats;
-    QLabel *MatchStats;
+    //QLabel *MatchStats;
     QLabel *RankedStats;
     QLabel *SlingOneText;
     QLabel *SlingTwoText;
@@ -133,9 +137,10 @@ private slots:
 
 public:
     mathClass myM;
-    int beginScore;
+    //int beginScore;
     player myP;
     void legWinner(bool playerID);
+    AudienceView* m_audienceWindow;
 };
 
 #endif // SCORERVIEW_H

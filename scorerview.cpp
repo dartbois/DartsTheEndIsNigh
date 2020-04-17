@@ -20,25 +20,29 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     SlingThreeText = ui->SlineThree;
     currentThrowLabel = ui->CurrentThrowLabel;
     lastThrowLabel = ui->LastThrowLabel;
+    audienceWindow->players = &myP;
+    m_audienceWindow = audienceWindow;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
    connect(this, &ScorerView::sendPlayerTwoStats, audienceWindow, &AudienceView::setPlayerTwoStatsText);
-   connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStats, audienceWindow, &AudienceView::setBothP1AndP2StatsText);
+   //connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStats, audienceWindow, &AudienceView::setBothP1AndP2StatsText);
    connect(this, &ScorerView::sendCurrentPlayerStats, audienceWindow, &AudienceView::setCurrentPlayerText);
    connect(this, &ScorerView::sendNumberOf180s, audienceWindow, &AudienceView::setNumberOf180sText);
    connect(this, &ScorerView::sendWinPercentages, audienceWindow, &AudienceView::setWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStats, audienceWindow, &AudienceView::setPersonalStatsText);
-   connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
+   //connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
    connect(this, &ScorerView::sendRankedStats, audienceWindow, &AudienceView::setRankedStatsText);
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
+   connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
+   connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
 
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
-   connect(this, &ScorerView::sendMatchStatsUndo, audienceWindow, &AudienceView::undoMatchStatsText);
+   //connect(this, &ScorerView::sendMatchStatsUndo, audienceWindow, &AudienceView::undoMatchStatsText);
    connect(this, &ScorerView::sendPlayerOneStatsUndo, audienceWindow, &AudienceView::undoPlayerOneStatsText);
    connect(this, &ScorerView::sendCurrentPlayerStatsUndo, audienceWindow, &AudienceView::undoCurrentPlayerText);
-   connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoBothP1AndP2StatsText);
+   //connect(this, &ScorerView::sendPlayerOneAndPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoBothP1AndP2StatsText);
    connect(this, &ScorerView::sendNumberOf180sUndo, audienceWindow, &AudienceView::undoNumberOf180sText);
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
@@ -78,7 +82,7 @@ void ScorerView::on_PlayerTwoStats_clicked()
     }
 }
 
-void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
+/*void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
 {
     if(ui->PlayerOneAndPlayerTwoStats->isChecked())
     {
@@ -88,7 +92,7 @@ void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
     {
         emit sendPlayerOneAndPlayerTwoStatsUndo();
     }
-}
+}*/
 
 void ScorerView::on_CurrentPlayerStats_clicked()
 {
@@ -138,7 +142,7 @@ void ScorerView::on_PersonalStats_clicked()
     }
 }
 
-void ScorerView::on_MatchStats_clicked()
+/*void ScorerView::on_MatchStats_clicked()
 {
     if(ui->MatchStats->isChecked())
     {
@@ -148,7 +152,7 @@ void ScorerView::on_MatchStats_clicked()
     {
         emit sendMatchStatsUndo();
     }
-}
+}*/
 
 void ScorerView::on_RankedStats_clicked()
 {
@@ -208,7 +212,9 @@ void ScorerView::on_ValadationYes_clicked()
         slingInt += slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("/t");
-
+        if (slingInt == 180) {
+            myP.playerMatch180s[0] = myP.playerMatch180s[0] + 1;
+        }
         winner = myM.scoreSubtract(0, slingInt);
     }
     else { //if myP.active is true, player2 is active
@@ -226,7 +232,9 @@ void ScorerView::on_ValadationYes_clicked()
         slingInt += slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("/t");
-
+        if (slingInt == 180) {
+            myP.playerMatch180s[1] = myP.playerMatch180s[1] + 1;
+        }
         winner = myM.scoreSubtract(1, slingInt);
     }
 
@@ -248,18 +256,44 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
-        if (winner == 0) {
+        if (winner == 0){
             legWinner(myP.active);
         }
-        else if (winner == 1) {
+        else if (winner == 1){
             legWinner(!(myP.active));
         }
+        //legWinner(winner);
     }
-    else {
+    else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
     }
+
+    int currentPlayerInt = 0;
+
+    if(myP.active == false)
+    {
+        currentPlayerInt = 0;
+    }
+    else
+    {
+        currentPlayerInt = 1;
+    }
+
+    QString currentPlayerPrediction;
+
+    currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
+
+    if(myP.active == false)
+    {
+        emit sendP1Prediction(currentPlayerPrediction);
+    }
+    else
+    {
+         emit sendP2Prediction(currentPlayerPrediction);
+    }
+
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -299,12 +333,13 @@ void ScorerView::getMSD(MatchStartData myMSD){
 void ScorerView::legWinner(bool winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
-
-    if (winnerIndex == false) {
-        myM.legWins[0] = myM.legWins[0] + 1;
+    if(winnerIndex == false)
+    {
+        myM.legWins[1] += 1;
     }
-    else if (winnerIndex == true){
-        myM.legWins[1] = myM.legWins[1] + 1;
+    else if (winnerIndex == true)
+    {
+        myM.legWins[0] += 1;
     }
 
 
