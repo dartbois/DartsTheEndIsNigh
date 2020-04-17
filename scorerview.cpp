@@ -34,6 +34,13 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    //connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
    connect(this, &ScorerView::sendRankedStats, audienceWindow, &AudienceView::setRankedStatsText);
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
+   connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
+   connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
+   //connect the current score labels on this scorer window, and then connect the current score to the audience view as well
+   connect(this, &ScorerView::sendP1CurrentScore, this, &ScorerView::setPlayerOneScoreText);
+   connect(this, &ScorerView::sendP2CurrentScore, this, &ScorerView::setPlayerTwoScoreText);
+   connect(this, &ScorerView::sendP1CurrentScore, audienceWindow, &AudienceView::setPlayerOneScoreText);
+   connect(this, &ScorerView::sendP2CurrentScore, audienceWindow, &AudienceView::setPlayerTwoScoreText);
 
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
@@ -45,9 +52,10 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendWinPercentagesUndo, audienceWindow, &AudienceView::undoWinPercentagesText);
    connect(this, &ScorerView::sendPersonalStatsUndo, audienceWindow, &AudienceView::undoPersonalStatsText);
    connect(this, &ScorerView::sendPlayerTwoStatsUndo, audienceWindow, &AudienceView::undoPlayerTwoStatsText);
-
-
-
+   connect(this, &ScorerView::sendP1CurrentScoreUndo, this, &ScorerView::undoP1CurrentScore);
+   connect(this, &ScorerView::sendP2CurrentScoreUndo, this, &ScorerView::undoP2CurrentScore);
+   connect(this, &ScorerView::sendP1CurrentScoreUndo, audienceWindow, &AudienceView::undoP1CurrentScore);
+   connect(this, &ScorerView::sendP2CurrentScoreUndo, audienceWindow, &AudienceView::undoP2CurrentScore);
 }
 
 ScorerView::~ScorerView()
@@ -79,17 +87,17 @@ void ScorerView::on_PlayerTwoStats_clicked()
     }
 }
 
-//void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
-//{
-//    if(ui->PlayerOneAndPlayerTwoStats->isChecked())
-//    {
-//        emit sendPlayerOneAndPlayerTwoStats();
-//    }
-//    else
-//    {
-//        emit sendPlayerOneAndPlayerTwoStatsUndo();
-//    }
-//}
+/*void ScorerView::on_PlayerOneAndPlayerTwoStats_clicked()
+{
+    if(ui->PlayerOneAndPlayerTwoStats->isChecked())
+    {
+        emit sendPlayerOneAndPlayerTwoStats();
+    }
+    else
+    {
+        emit sendPlayerOneAndPlayerTwoStatsUndo();
+    }
+}*/
 
 void ScorerView::on_CurrentPlayerStats_clicked()
 {
@@ -139,17 +147,17 @@ void ScorerView::on_PersonalStats_clicked()
     }
 }
 
-//void ScorerView::on_MatchStats_clicked()
-//{
-//    if(ui->MatchStats->isChecked())
-//    {
-//        emit sendMatchStats();
-//    }
-//    else
-//    {
-//        emit sendMatchStatsUndo();
-//    }
-//}
+/*void ScorerView::on_MatchStats_clicked()
+{
+    if(ui->MatchStats->isChecked())
+    {
+        emit sendMatchStats();
+    }
+    else
+    {
+        emit sendMatchStatsUndo();
+    }
+}*/
 
 void ScorerView::on_RankedStats_clicked()
 {
@@ -194,7 +202,7 @@ void ScorerView::on_ValadationYes_clicked()
     QString slingHolder = "";
 
     //code to get values from slings 1, 2, 3
-    if (myP.active == true) { //if player 1 is active
+    if (myP.active == false) { //if player 1 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p1Slings.append(slingHolder);
@@ -212,7 +220,7 @@ void ScorerView::on_ValadationYes_clicked()
 
         winner = myM.scoreSubtract(0, slingInt);
     }
-    else { //if myP.active is false, player2 is active
+    else { //if myP.active is true, player2 is active
         slingHolder = SlingOneText->text();
         slingInt = slingHolder.toInt();
         myP.p2Slings.append(slingHolder);
@@ -249,19 +257,53 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
+        if (winner ==0){
+            legWinner(!(myP.active));
+        }
+        else if (winner == 1){
+            legWinner(winner);
+        }
         legWinner(winner);
     }
-   // else {
+    else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
-
-   // }
-    myP.active = !(myP.active);
-    if(ui->CurrentPlayerStats->isChecked())
-    {
-        emit sendCurrentPlayerStatsUndo();
-        emit sendCurrentPlayerStats();
+        myP.active = !(myP.active);
     }
+
+    int currentPlayerInt = 0;
+
+    if(myP.active == false)
+    {
+        currentPlayerInt = 0;
+    }
+    else
+    {
+        currentPlayerInt = 1;
+    }
+
+    QString currentPlayerPrediction;
+
+    currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
+
+    if(myP.active == false)
+    {
+        emit sendP1Prediction(currentPlayerPrediction);
+    }
+    else
+    {
+         emit sendP2Prediction(currentPlayerPrediction);
+    }
+    //Clearing the labels forces them to update the text
+    emit sendP1CurrentScoreUndo();
+    emit sendP2CurrentScoreUndo();
+    emit sendCurrentPlayerStatsUndo();
+
+    //Now, set the labels' text
+    emit sendP1CurrentScore(myM.currentScore[0]);
+    emit sendP2CurrentScore(myM.currentScore[1]);
+    emit sendCurrentPlayerStats();
+    this->repaint();
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -289,6 +331,26 @@ void ScorerView::on_SlineThree_linkActivated(const QString &link)
 
 }
 
+void ScorerView::setPlayerOneScoreText(int score)
+{
+    this->ui->PlayerOneScore->setText(QString::number(score));
+}
+
+void ScorerView::setPlayerTwoScoreText(int score)
+{
+    this->ui->PlayerTwoScore->setText(QString::number(score));
+}
+
+void ScorerView::undoP1CurrentScore()
+{
+    this->ui->PlayerOneScore->clear();
+}
+
+void ScorerView::undoP2CurrentScore()
+{
+    this->ui->PlayerTwoScore->clear();
+}
+
 void ScorerView::getMSD(MatchStartData myMSD){
     myM.currentScore[0] = myMSD.gameStartScore;
     myM.currentScore[1] = myMSD.gameStartScore;
@@ -296,12 +358,33 @@ void ScorerView::getMSD(MatchStartData myMSD){
     myM.legTotal = myMSD.gameLegs;
     myM.matchTotal = myMSD.gameMatches;
     myP.postInit(myMSD.gamePs[0], myMSD.gamePs[1]);
+
+    //Clearing the labels forces them to update the text
+    emit sendP1CurrentScoreUndo();
+    emit sendP2CurrentScoreUndo();
+
+    //Now, set the labels' text
+    emit sendP1CurrentScore(myM.currentScore[0]);
+    emit sendP2CurrentScore(myM.currentScore[1]);
+
 }
 
 void ScorerView::legWinner(int winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
-    myM.legWins[winnerIndex] += 1;
+    if(winnerIndex == false)
+    {
+        myM.legWins[1] += 1;
+    }
+    else if (winnerIndex == true)
+    {
+        myM.legWins[winnerIndex] += 1;
+    }
+
+    myM.currentScore[0] = myM.startScore;
+    myM.currentScore[1] = myM.startScore;
+    myP.p1Slings.append("\n");
+    myP.p2Slings.append("\n");
 
     //it is impossible to tie on legs, so total number of legs is just total number of leg victories.
     if ((myM.legWins[0] + myM.legWins[1]) == myM.legTotal){

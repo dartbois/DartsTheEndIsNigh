@@ -40,6 +40,10 @@ public slots:
     //void setMatchStatsText();
     void setRankedStatsText();
     void setLatestThrowText(QString *latestThrow);
+    void setP1Prediction(QString prediction);
+    void setP2Prediction(QString prediction);
+    void setPlayerOneScoreText(int score);
+    void setPlayerTwoScoreText(int score);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental
@@ -51,6 +55,8 @@ public slots:
     void undoWinPercentagesText();
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
+    void undoP1CurrentScore();
+    void undoP2CurrentScore();
 public:
    //initializes the UI
    Ui::AudienceView *ui;
@@ -70,12 +76,12 @@ private slots:
    //when a button is checked in scorerview,
    //these functions make audienceview respond.
    void on_Player2Stats_linkActivated(const QString &link);
-   void on_BothP1AndP2Stats_linkActivated(const QString &link);
+   //void on_BothP1AndP2Stats_linkActivated(const QString &link);
    void on_CurrentPlayer_linkActivated(const QString &link);
    void on_NumberOf180s_linkActivated(const QString &link);
    void on_WinPercentages_linkActivated(const QString &link);
    void on_PersonalStats_linkActivated(const QString &link);
-   void on_MatchStats_linkActivated(const QString &link);
+   //void on_MatchStats_linkActivated(const QString &link);
    void on_RankedStats_linkActivated(const QString &link);
 };
 

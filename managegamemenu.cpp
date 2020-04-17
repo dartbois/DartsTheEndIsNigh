@@ -12,6 +12,7 @@ ManageGameMenu::ManageGameMenu(QWidget *parent) :
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     FillGameList();
     gameAddEditMenu = new GameAddEditMenu();
+    gameReviewMenu = new GameReviewMenu();
 
     //experimental
     connect(gameAddEditMenu, SIGNAL(refreshGList()), this, SLOT(refreshGameAdded()));
@@ -96,6 +97,21 @@ void ManageGameMenu::refreshGameAdded(){
 
 void ManageGameMenu::on_GameMenuReview_clicked()
 {
-    gameReviewMenu = new GameReviewMenu();
-    gameReviewMenu -> show();
+    if (ui->listWidget->currentRow() != 0 && ui->listWidget->currentRow() != NULL){
+        DataHandler myD;
+        int gotGID;
+        QString currentItem = ui->listWidget->currentItem()->text();
+
+        if (QString::compare(currentItem, "") != 0){
+            QStringList currentItemList = currentItem.split("\t");
+            gotGID = currentItemList[0].toInt();
+
+            if (currentItemList[6] == "1"){
+                gameReviewMenu->oGID = gotGID;
+                gameReviewMenu->FillMenu(gotGID);
+                gameReviewMenu -> show();
+            }
+
+        }
+    }
 }

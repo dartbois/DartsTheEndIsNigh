@@ -108,6 +108,16 @@ string DataHandler::sqlGet(string request){
         int temp = mySql.sqlGetGameP2(id);
         answer = to_string(temp);
     }
+    else if (strcmp(varGet, "gameWinner") == 0){
+        int temp = mySql.sqlGetWinner(id);
+        answer = to_string(temp);
+    }
+    else if (strcmp(varGet, "gameP1Slings") == 0){
+        answer = mySql.sqlGetP1Slings(id);
+    }
+    else if (strcmp(varGet, "gameP2Slings") == 0){
+        answer = mySql.sqlGetP2Slings(id);
+    }
     else if (strcmp(varGet, "playerInfoList") == 0){
         answer = mySql.sqlGetPlayerList();
     }

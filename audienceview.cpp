@@ -26,6 +26,17 @@ AudienceView::AudienceView(QWidget *parent) :
     RankedStats = ui->RankedStats;
     playerCounter = 1;
     this->players = NULL;
+
+    mathClass myMath;
+
+    QString playerOneWin = QString::fromStdString(myMath.winThrowCalc(0));
+    QString playerTwoWin = QString::fromStdString(myMath.winThrowCalc(1));
+
+    ui->PlayerOnePredictions->setVisible(true);
+    ui->PlayerTwoPredictions->setVisible(true);
+
+    ui->PlayerOnePredictions->setText(playerOneWin);
+    ui->PlayerTwoPredictions->setText(playerTwoWin);
 }
 
 AudienceView::~AudienceView()
@@ -43,11 +54,11 @@ void AudienceView::on_Player2Stats_linkActivated(const QString &link)
 
 }
 
-void AudienceView::on_BothP1AndP2Stats_linkActivated(const QString &link)
+/*void AudienceView::on_BothP1AndP2Stats_linkActivated(const QString &link)
 {
 
 }
-
+*/
 void AudienceView::on_CurrentPlayer_linkActivated(const QString &link)
 {
 
@@ -68,11 +79,11 @@ void AudienceView::on_PersonalStats_linkActivated(const QString &link)
 
 }
 
-void AudienceView::on_MatchStats_linkActivated(const QString &link)
+/*void AudienceView::on_MatchStats_linkActivated(const QString &link)
 {
 
 }
-
+*/
 void AudienceView::on_RankedStats_linkActivated(const QString &link)
 {
 
@@ -126,6 +137,8 @@ void AudienceView::setPlayerOneStatsText()
 void AudienceView::setPlayerTwoStatsText()
 {
     DataHandler myD;
+    player myP(1,3);
+
     QString stats;
     QString statsName, statsHome, statsRank, statsAvg180s;
     QString temp2;
@@ -168,10 +181,10 @@ void AudienceView::setPlayerTwoStatsText()
     ui->Player2Stats->setText(stats);
 }
 
-//void AudienceView::setBothP1AndP2StatsText()
-//{
-//    ui->BothP1AndP2Stats->setText("Player One and Player Two Statistics : ");
-//}
+/*void AudienceView::setBothP1AndP2StatsText()
+{
+    ui->BothP1AndP2Stats->setText("Player One and Player Two Statistics : ");
+}*/
 
 void AudienceView::setCurrentPlayerText()
 {
@@ -370,8 +383,8 @@ void AudienceView::setWinPercentagesText()
 void AudienceView::setPersonalStatsText()
 {
     ui->PersonalStats->setText("Personal Statistics : ");
-    DataHandler myD;
 
+    DataHandler myD;
     QString stats;
     QString statsName, statsHome, statsRank, statsAvg180s;
     QString temp2;
@@ -418,11 +431,6 @@ void AudienceView::setPersonalStatsText()
 
     ui->PersonalStats->setText(playersData);
 }
-
-//void AudienceView::setMatchStatsText()
-//{
-//    ui->MatchStats->setText("Match Statistics : ");
-//}
 
 void AudienceView::setRankedStatsText()
 {
@@ -476,25 +484,57 @@ void AudienceView::setRankedStatsText()
     ui->RankedStats->setText(playersData);
 }
 
+void  AudienceView::setP1Prediction(QString prediction)
+{
+    this -> ui -> PlayerOnePredictions -> setText(prediction);
+}
+
+void  AudienceView::setP2Prediction(QString prediction)
+{
+    this -> ui -> PlayerTwoPredictions -> setText(prediction);
+}
+void AudienceView::setPlayerOneScoreText(int score)
+{
+    this->ui->PlayerOneCurrentScore->setText(QString::number(score));
+}
+
+void AudienceView::setPlayerTwoScoreText(int score)
+{
+    this->ui->PlayerTwoCurrentScore->setText(QString::number(score));
+}
+
+void AudienceView::undoP1CurrentScore()
+{
+    this->ui->PlayerOneCurrentScore->clear();
+}
+
+void AudienceView::undoP2CurrentScore()
+{
+    this->ui->PlayerTwoCurrentScore->clear();
+}
+
 void AudienceView::undoRankedText()         //Experimental
 {
     ui->RankedStats->clear();
 }
 
-//void AudienceView::undoMatchStatsText()
-//{
-//    ui->MatchStats->clear();
-//}
+/*void AudienceView::undoMatchStatsText()
+{
+    ui->MatchStats->clear();
+}*/
+
 
 void AudienceView::undoPlayerTwoStatsText()
 {
     ui->Player2Stats->clear();
 }
 
-//void AudienceView::undoBothP1AndP2StatsText()
-//{
-//    ui->BothP1AndP2Stats->clear();
-//}
+/*void AudienceView::undoBothP1AndP2StatsText()
+{
+    ui->BothP1AndP2Stats->clear();
+}*/
+
+
 void AudienceView::undoCurrentPlayerText()
 {
     ui->CurrentPlayer->clear();
