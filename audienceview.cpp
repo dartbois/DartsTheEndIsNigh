@@ -484,6 +484,16 @@ void AudienceView::setRankedStatsText()
     ui->RankedStats->setText(playersData);
 }
 
+void  AudienceView::setP1Prediction(QString prediction)
+{
+    this -> ui -> PlayerOnePredictions -> setText(prediction);
+}
+
+void  AudienceView::setP2Prediction(QString prediction)
+{
+    this -> ui -> PlayerTwoPredictions -> setText(prediction);
+}
+
 void AudienceView::undoRankedText()         //Experimental
 {
     ui->RankedStats->clear();

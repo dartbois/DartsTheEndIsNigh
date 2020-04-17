@@ -40,6 +40,8 @@ public slots:
     //void setMatchStatsText();
     void setRankedStatsText();
     void setLatestThrowText(QString *latestThrow);
+    void setP1Prediction(QString prediction);
+    void setP2Prediction(QString prediction);
 
     //The undo signals clear the bottom pane stats labels on the audience view
     void undoRankedText();      //Experimental

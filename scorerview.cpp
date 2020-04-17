@@ -34,6 +34,8 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    //connect(this, &ScorerView::sendMatchStats, audienceWindow, &AudienceView::setMatchStatsText);
    connect(this, &ScorerView::sendRankedStats, audienceWindow, &AudienceView::setRankedStatsText);
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
+   connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
+   connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
 
    //connect the label-clearing undo signals to the audience window slots
    connect(this, &ScorerView::sendRankedStatsUndo, audienceWindow, &AudienceView::undoRankedText);
@@ -250,13 +252,44 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
+        if (winner ==0){
+            legWinner(!(myP.active));
+        }
+        else if (winner == 1){
+            legWinner(winner);
+        }
         legWinner(winner);
     }
-    else {
+    else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
     }
+
+    int currentPlayerInt = 0;
+
+    if(myP.active == false)
+    {
+        currentPlayerInt = 0;
+    }
+    else
+    {
+        currentPlayerInt = 1;
+    }
+
+    QString currentPlayerPrediction;
+
+    currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
+
+    if(myP.active == false)
+    {
+        emit sendP1Prediction(currentPlayerPrediction);
+    }
+    else
+    {
+         emit sendP2Prediction(currentPlayerPrediction);
+    }
+
 }
 
 void ScorerView::on_ValadationNo_clicked()
@@ -296,7 +329,16 @@ void ScorerView::getMSD(MatchStartData myMSD){
 void ScorerView::legWinner(int winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
-    myM.legWins[winnerIndex] += 1;
+    if(winnerIndex == false)
+    {
+        myM.legWins[1] += 1;
+    }
+    else if (winnerIndex == true)
+    {
+        myM.legWins[winnerIndex] += 1;
+    }
+
+
     myP.p1Slings.append("\n");
     myP.p2Slings.append("\n");
 

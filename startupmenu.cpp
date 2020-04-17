@@ -9,8 +9,8 @@ StartupMenu::StartupMenu(QWidget *parent) :
     this->setWindowTitle("Startup Menu");
     this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     manageChoiceMenu = new ManageChoiceMenu();
-    audienceWindow = new AudienceView();
-    scorerWindow = new ScorerView(audienceWindow);
+    //audienceWindow = new AudienceView();
+    //scorerWindow = new ScorerView(audienceWindow);
     dartboardWindow = new Widget();
     //gameSelectionMenu = new GameSelectionMenu();
 }
