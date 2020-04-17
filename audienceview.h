@@ -53,8 +53,6 @@ public slots:
     void undoWinPercentagesText();
     void undoPersonalStatsText();
     void undoPlayerOneStatsText();
-
-
 public:
    //initializes the UI
    Ui::AudienceView *ui;

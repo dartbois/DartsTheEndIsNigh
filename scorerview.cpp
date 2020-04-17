@@ -252,20 +252,19 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
-        if(winner == 0)
-        {
+        if (winner ==0){
             legWinner(!(myP.active));
         }
-        else if (winner == 1)
-        {
+        else if (winner == 1){
             legWinner(winner);
         }
         legWinner(winner);
     }
-    else {
+    else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
+        qDebug() << "The bool is: " << myP.active;
     }
 
     int currentPlayerInt = 0;
@@ -291,6 +290,7 @@ void ScorerView::on_ValadationYes_clicked()
     {
          emit sendP2Prediction(currentPlayerPrediction);
     }
+
 }
 
 void ScorerView::on_ValadationNo_clicked()

@@ -9,6 +9,8 @@ GameSelectionMenu::GameSelectionMenu(QWidget *parent) :
     ui(new Ui::GameSelectionMenu)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Game Selection Menu");
+    this->setWindowFlag(Qt::WindowMinMaxButtonsHint);
     audienceWindow = new AudienceView();
     scorerWindow = new ScorerView(audienceWindow);
     FillGameList();
