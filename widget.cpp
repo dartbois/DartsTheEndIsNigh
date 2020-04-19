@@ -9,6 +9,7 @@
 #include <QtCore/QTimer>
 #include <QCursor>
 #include <QDebug>
+
 #include "scorerview.h"
 
 
@@ -54,15 +55,11 @@ Widget::Widget(QWidget *parent)
         for (int j = 0; j < sliceCount; j++) {
             qreal value = 5;
             QPieSlice *slice = new QPieSlice(QString("%1").arg(value), value);
+            m_slices.append(slice);
             slice->setLabelVisible(false);
             slice->setLabelColor(Qt::black);
             slice->setLabelPosition(QPieSlice::LabelInsideTangential);
             connect(slice, &QPieSlice::clicked, this, &Widget::addScore);
-            if(typeid(parent) == typeid(AudienceView*))
-            {
-            qDebug() << "This is the connect for pie slice clicked";
-            connect(slice, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
-            }
             donut->append(slice);
             donut->setHoleSize(minSize + i * (maxSize - minSize) / donutCount);
             donut->setPieSize(minSize + (i + 1) * (maxSize - minSize) / donutCount);
@@ -74,6 +71,7 @@ Widget::Widget(QWidget *parent)
                 slice->setLabelVisible(true);
                 //This is the outermost ring, so we need to disconnect it from the slot to make it unclickable
                 disconnect(slice, &QPieSlice::clicked, this, &Widget::addScore);
+                outerSlices.append(slice);
                 slice->setColor(Qt::white);
                 slice->setBorderWidth(3);
                 donut->setPieSize(donut->pieSize() * 0.93);
@@ -216,14 +214,11 @@ Widget::Widget(QWidget *parent)
     int value = 50;
     innerBullseye->setPieSize(minSize * (maxSize - minSize) / donutCount);
     QPieSlice *slice = new QPieSlice(QString("%1").arg(value), value);
+    m_slices.append(slice);
     slice->setLabelVisible(false);
     slice->setLabelColor(Qt::white);
     slice->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     connect(slice, &QPieSlice::clicked, this, &Widget::addScore);
-    if(typeid(parent) == typeid(AudienceView*))
-    {
-    connect(slice, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
-    }
     slice->setColor(Qt::black);
     slice->setBorderColor(Qt::black);
     slice->setBorderWidth(5);
@@ -235,14 +230,11 @@ Widget::Widget(QWidget *parent)
     QPieSeries *outerBullseye = new QPieSeries;
     int outerValue = 25;
     QPieSlice *slice2 = new QPieSlice(QString("%1").arg(outerValue), outerValue);
+    m_slices.append(slice2);
     slice2->setLabelVisible(false);
     slice2->setLabelColor(Qt::black);
     slice2->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     connect(slice2, &QPieSlice::clicked, this, &Widget::addScore);
-    if(typeid(parent) == typeid(AudienceView*))
-    {
-    connect(slice2, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
-    } //experimental
     slice2->setColor(Qt::red);
     outerBullseye->setHoleSize(0.025);
     outerBullseye->setPieSize(0.08);
@@ -282,7 +274,6 @@ Widget::~Widget()
 void Widget::addScore()
 {
     QPieSlice *slice = qobject_cast<QPieSlice *>(sender());
-    m_slices.append(slice);
     Widget::scoreDisplayer->clear();
 //    QString scoreString = "Score: ";
 //    scoreString.append(QString::number(this->score));
@@ -327,6 +318,28 @@ void Widget::validationBlocker(bool blockForValidation)
         for(int i = 0; i < m_slices.size(); i++)
         {
             m_slices[i]->setLabelVisible(false);
+        }
+        for(int i = 0; i < outerSlices.size(); i++)
+        {
+            outerSlices[i]->setLabelVisible(true);
+        }
+    }
+}
+
+//This slot will take in the dart score int and reverse-engineer the slice it came from, then make its label visible
+void Widget::mirrorDart(int i)
+{
+    Widget *dartboard = qobject_cast<Widget *>(sender());
+
+    for(int j = 0; j < dartboard->m_slices.size(); j++)
+    {
+        if(dartboard->m_slices[j]->isLabelVisible())
+        {
+            this->m_slices[j]->setLabelVisible(true);
+        }
+        else
+        {
+            this->m_slices[j]->setLabelVisible(false);
         }
     }
 }

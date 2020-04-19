@@ -165,7 +165,8 @@ public:
     player myP;
     void legWinner(bool winnerIndex);
     AudienceView* m_audienceWindow;
-    Widget* dartboard;
+    Widget* audienceDartboard;
+    Widget* scorerDartboard;
 };
 
 #endif // SCORERVIEW_H

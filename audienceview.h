@@ -72,7 +72,7 @@ public:
    //QLabel *MatchStats;
    QLabel *RankedStats;
    player *players;
-   Widget *dartboard;
+   Widget* audienceDartboard;
 
 private slots:
    //when a button is checked in scorerview,

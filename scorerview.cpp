@@ -21,8 +21,9 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     currentThrowLabel = ui->CurrentThrowLabel;
     lastThrowLabel = ui->LastThrowLabel;
     audienceWindow->players = &myP;
+    audienceDartboard = audienceWindow->audienceDartboard;
+    this->scorerDartboard = this->ui->widget;
     m_audienceWindow = audienceWindow;
-    dartboard = ui->widget;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
@@ -37,6 +38,11 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
    connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
    connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
+
+   connect(this->scorerDartboard, &Widget::scoreSignalOne, this->audienceDartboard, &Widget::mirrorDart);
+   connect(this->scorerDartboard, &Widget::scoreSignalTwo, this->audienceDartboard, &Widget::mirrorDart);
+   connect(this->scorerDartboard, &Widget::scoreSignalThree, this->audienceDartboard, &Widget::mirrorDart);
+
 
    //connect the current score labels on this scorer window, and then connect the current score to the audience view as well
    connect(this, &ScorerView::sendP1CurrentScore, this, &ScorerView::setPlayerOneScoreText);

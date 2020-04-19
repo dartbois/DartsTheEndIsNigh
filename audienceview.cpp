@@ -26,7 +26,8 @@ AudienceView::AudienceView(QWidget *parent) :
     RankedStats = ui->RankedStats;
     playerCounter = 1;
     this->players = NULL;
-    dartboard = this->ui->widgetHolder;
+    this->audienceDartboard = this->ui->widgetHolder;
+
     mathClass myMath;
 
     QString playerOneWin = QString::fromStdString(myMath.winThrowCalc(0));
@@ -487,13 +488,11 @@ void AudienceView::setRankedStatsText()
 void  AudienceView::setP1Prediction(QString prediction)
 {
     this -> ui -> PlayerOnePredictions -> setText(prediction);
-    this -> repaint();
 }
 
 void  AudienceView::setP2Prediction(QString prediction)
 {
     this -> ui -> PlayerTwoPredictions -> setText(prediction);
-    this -> repaint();
 }
 
 void AudienceView::setPlayerOneScoreText(int score)
