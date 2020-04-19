@@ -26,6 +26,7 @@ AudienceView::AudienceView(QWidget *parent) :
     RankedStats = ui->RankedStats;
     playerCounter = 1;
     this->players = NULL;
+    this->audienceDartboard = this->ui->widgetHolder;
 
     mathClass myMath;
 

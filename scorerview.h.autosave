@@ -26,8 +26,8 @@ public:
     //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
-    //int legNumber;
-    //int matchNumber;
+    int legNumber;
+    int matchNumber;
 
 public slots:
     //these react to the user interacting with the UI.
@@ -35,13 +35,13 @@ public slots:
 
     void on_PlayerTwoStats_clicked();
 
-    //void on_PlayerOneAndPlayerTwoStats_clicked();
+    void on_PlayerOneAndPlayerTwoStats_clicked();
 
     void on_CurrentPlayerStats_clicked();
 
     void on_RankedStats_clicked();
 
-    //void on_MatchStats_clicked();
+    void on_MatchStats_clicked();
 
     void on_PersonalStats_clicked();
 
@@ -55,14 +55,6 @@ public slots:
 
     void set_SlingThreeText(int score);
 
-    void setPlayerOneScoreText(int score);
-
-    void setPlayerTwoScoreText(int score);
-
-    void undoP1CurrentScore();
-
-    void undoP2CurrentScore();
-
     //gets a MatchStartData from GameSelectionMenu.
     void getMSD(MatchStartData myMSD);
 
@@ -73,13 +65,13 @@ signals:
 
     void sendPlayerTwoStats();
 
-    //void sendPlayerOneAndPlayerTwoStats();
+    void sendPlayerOneAndPlayerTwoStats();
 
     void sendCurrentPlayerStats();
 
     void sendRankedStats();
 
-    //void sendMatchStats();
+    void sendMatchStats();
 
     void sendPersonalStats();
 
@@ -87,14 +79,10 @@ signals:
 
     void sendNumberOf180s();
 
-    void sendP1CurrentScore(int score);
-
-    void sendP2CurrentScore(int score);
-
     //These signals will clear the stats from the audience window
     void sendRankedStatsUndo();
 
-    //void sendMatchStatsUndo();
+    void sendMatchStatsUndo();
 
     void sendPersonalStatsUndo();
 
@@ -106,13 +94,9 @@ signals:
 
     void sendPlayerTwoStatsUndo();
 
-    //void sendPlayerOneAndPlayerTwoStatsUndo();
+    void sendPlayerOneAndPlayerTwoStatsUndo();
 
     void sendCurrentPlayerStatsUndo();
-
-    void sendP1CurrentScoreUndo();
-
-    void sendP2CurrentScoreUndo();
 
     //These signals will be used for validation of the scores
     void sendValidateTrue(bool unblockScore);
@@ -120,21 +104,17 @@ signals:
     //These signals will be used to send the latest throw string to Audience View
     void sendLatestThrow(QString *latestThrow);
 
-    void sendP1Prediction(QString prediction);
-
-    void sendP2Prediction(QString prediction);
-
 public:
     //various UI elements
     Ui::ScorerView *ui;
     QLabel *StatisticsDisplay;
     QLabel *Player2Stats;
-    //QLabel *BothP1AndP2Stats;
+    QLabel *BothP1AndP2Stats;
     QLabel *CurrentPlayer;
     QLabel *NumberOf180s;
     QLabel *WinPercentages;
     QLabel *PersonalStats;
-    //QLabel *MatchStats;
+    QLabel *MatchStats;
     QLabel *RankedStats;
     QLabel *SlingOneText;
     QLabel *SlingTwoText;
@@ -143,8 +123,6 @@ public:
     QLabel *lastThrowLabel;
     QString *currentThrow;
     QString *lastThrow;
-    QString *currentScoreP1;
-    QString *currentScoreP2;
 
 private slots:
     void on_ValadationYes_clicked();
@@ -153,20 +131,12 @@ private slots:
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
 
-    void on_zeroSling1_clicked();
-
-    void on_zeroSling2_clicked();
-
-    void on_zeroSling3_clicked();
-
 public:
     mathClass myM;
-    //int beginScore;
+    int beginScore;
     player myP;
-    void legWinner(bool winnerIndex);
-    AudienceView* m_audienceWindow;
-    Widget* audienceDartboard;
-    Widget* scorerDartboard;
+    void legWinner(int playerID);
+    AudienceView m_audienceWindow;
 };
 
 #endif // SCORERVIEW_H
