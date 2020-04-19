@@ -26,8 +26,8 @@ public:
     //constructor/destructor
     explicit ScorerView(AudienceView *audienceWindow);
     ~ScorerView();
-    int legNumber;
-    int matchNumber;
+    //int legNumber;
+    //int matchNumber;
 
 public slots:
     //these react to the user interacting with the UI.
@@ -124,7 +124,6 @@ signals:
 
     void sendP2Prediction(QString prediction);
 
-
 public:
     //various UI elements
     Ui::ScorerView *ui;
@@ -154,12 +153,19 @@ private slots:
     void on_SlingTwo_linkActivated(const QString &link);
     void on_SlineThree_linkActivated(const QString &link);
 
+    void on_zeroSling1_clicked();
+
+    void on_zeroSling2_clicked();
+
+    void on_zeroSling3_clicked();
+
 public:
     mathClass myM;
-    int beginScore;
+    //int beginScore;
     player myP;
-    void legWinner(int playerID);
+    void legWinner(bool winnerIndex);
     AudienceView* m_audienceWindow;
+    Widget* dartboard;
 };
 
 #endif // SCORERVIEW_H

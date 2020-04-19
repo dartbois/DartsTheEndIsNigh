@@ -8,6 +8,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtCore/QTimer>
 #include <QCursor>
+#include <QDebug>
 #include "scorerview.h"
 
 
@@ -57,6 +58,11 @@ Widget::Widget(QWidget *parent)
             slice->setLabelColor(Qt::black);
             slice->setLabelPosition(QPieSlice::LabelInsideTangential);
             connect(slice, &QPieSlice::clicked, this, &Widget::addScore);
+            if(typeid(parent) == typeid(AudienceView*))
+            {
+            qDebug() << "This is the connect for pie slice clicked";
+            connect(slice, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
+            }
             donut->append(slice);
             donut->setHoleSize(minSize + i * (maxSize - minSize) / donutCount);
             donut->setPieSize(minSize + (i + 1) * (maxSize - minSize) / donutCount);
@@ -214,6 +220,10 @@ Widget::Widget(QWidget *parent)
     slice->setLabelColor(Qt::white);
     slice->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     connect(slice, &QPieSlice::clicked, this, &Widget::addScore);
+    if(typeid(parent) == typeid(AudienceView*))
+    {
+    connect(slice, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
+    }
     slice->setColor(Qt::black);
     slice->setBorderColor(Qt::black);
     slice->setBorderWidth(5);
@@ -229,6 +239,10 @@ Widget::Widget(QWidget *parent)
     slice2->setLabelColor(Qt::black);
     slice2->setLabelPosition(QPieSlice::LabelInsideHorizontal);
     connect(slice2, &QPieSlice::clicked, this, &Widget::addScore);
+    if(typeid(parent) == typeid(AudienceView*))
+    {
+    connect(slice2, &QPieSlice::clicked, (dynamic_cast<AudienceView*>(parent)->dartboard), &Widget::addScore);
+    } //experimental
     slice2->setColor(Qt::red);
     outerBullseye->setHoleSize(0.025);
     outerBullseye->setPieSize(0.08);

@@ -22,6 +22,7 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
     lastThrowLabel = ui->LastThrowLabel;
     audienceWindow->players = &myP;
     m_audienceWindow = audienceWindow;
+    dartboard = ui->widget;
 
     //connect the show stats signals to the audience window slots
    connect(this, &ScorerView::sendPlayerOneStats, audienceWindow, &AudienceView::setPlayerOneStatsText);
@@ -36,6 +37,7 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendLatestThrow, audienceWindow, &AudienceView::setLatestThrowText);
    connect(this, &ScorerView::sendP1Prediction, audienceWindow, &AudienceView::setP1Prediction);
    connect(this, &ScorerView::sendP2Prediction, audienceWindow, &AudienceView::setP2Prediction);
+
    //connect the current score labels on this scorer window, and then connect the current score to the audience view as well
    connect(this, &ScorerView::sendP1CurrentScore, this, &ScorerView::setPlayerOneScoreText);
    connect(this, &ScorerView::sendP2CurrentScore, this, &ScorerView::setPlayerTwoScoreText);
@@ -56,6 +58,9 @@ ScorerView::ScorerView(AudienceView *audienceWindow) :
    connect(this, &ScorerView::sendP2CurrentScoreUndo, this, &ScorerView::undoP2CurrentScore);
    connect(this, &ScorerView::sendP1CurrentScoreUndo, audienceWindow, &AudienceView::undoP1CurrentScore);
    connect(this, &ScorerView::sendP2CurrentScoreUndo, audienceWindow, &AudienceView::undoP2CurrentScore);
+
+
+
 }
 
 ScorerView::~ScorerView()
@@ -218,6 +223,9 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p1Slings.append(slingHolder);
         myP.p1Slings.append("/t");
 
+        if (slingInt == 180) {
+            myP.playerMatch180s[0] = myP.playerMatch180s[0] + 1;
+        }
         winner = myM.scoreSubtract(0, slingInt);
     }
     else { //if myP.active is true, player2 is active
@@ -236,6 +244,9 @@ void ScorerView::on_ValadationYes_clicked()
         myP.p2Slings.append(slingHolder);
         myP.p2Slings.append("/t");
 
+        if (slingInt == 180) {
+            myP.playerMatch180s[1] = myP.playerMatch180s[1] + 1;
+        }
         winner = myM.scoreSubtract(1, slingInt);
     }
 
@@ -257,28 +268,27 @@ void ScorerView::on_ValadationYes_clicked()
     SlingThreeText->clear();
 
     if (winner < 2){ //if there was a winner for this leg, send it to legWinner.
-        if (winner ==0){
-            legWinner(!(myP.active));
+        if (winner == 0){
+            legWinner(myP.active);
         }
         else if (winner == 1){
-            legWinner(winner);
+            legWinner(!(myP.active));
         }
-        legWinner(winner);
+        //legWinner(winner);
     }
     else{
         //Otherwise, we go to the next leg. Not sure how to implement this exactly.
         //flips a boolean value which controls which player is being affected by all this
         myP.active = !(myP.active);
+        qDebug() << "The bool is: " << myP.active;
     }
 
     int currentPlayerInt = 0;
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         currentPlayerInt = 0;
     }
-    else
-    {
+    else{
         currentPlayerInt = 1;
     }
 
@@ -286,14 +296,13 @@ void ScorerView::on_ValadationYes_clicked()
 
     currentPlayerPrediction = QString::fromStdString(myM.winThrowCalc(currentPlayerInt));
 
-    if(myP.active == false)
-    {
+    if(myP.active == false){
         emit sendP1Prediction(currentPlayerPrediction);
     }
-    else
-    {
+    else{
          emit sendP2Prediction(currentPlayerPrediction);
     }
+
     //Clearing the labels forces them to update the text
     emit sendP1CurrentScoreUndo();
     emit sendP2CurrentScoreUndo();
@@ -302,7 +311,9 @@ void ScorerView::on_ValadationYes_clicked()
     //Now, set the labels' text
     emit sendP1CurrentScore(myM.currentScore[0]);
     emit sendP2CurrentScore(myM.currentScore[1]);
-    emit sendCurrentPlayerStats();
+    if (ui->CurrentPlayerStats->isChecked()){
+        emit sendCurrentPlayerStats();
+    }
     this->repaint();
 }
 
@@ -366,10 +377,9 @@ void ScorerView::getMSD(MatchStartData myMSD){
     //Now, set the labels' text
     emit sendP1CurrentScore(myM.currentScore[0]);
     emit sendP2CurrentScore(myM.currentScore[1]);
-
 }
 
-void ScorerView::legWinner(int winnerIndex) {
+void ScorerView::legWinner(bool winnerIndex) {
     int victoryIndex = 3; //0 for players index 0, 1 for player index 1, 2 for tie, 3 for no winner yet
     //verify leg winner! do a window or something
     if(winnerIndex == false)
@@ -378,7 +388,7 @@ void ScorerView::legWinner(int winnerIndex) {
     }
     else if (winnerIndex == true)
     {
-        myM.legWins[winnerIndex] += 1;
+        myM.legWins[0] += 1;
     }
 
     myM.currentScore[0] = myM.startScore;
@@ -413,4 +423,22 @@ void ScorerView::legWinner(int winnerIndex) {
             //we will boot up a sqlhandler and YEET THAT INFO INTO THE DB.
         }
     }
+}
+
+void ScorerView::on_zeroSling1_clicked()
+{
+    this->SlingOneText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling2_clicked()
+{
+    this->SlingTwoText->setText(QString::number(0));
+    this->repaint();
+}
+
+void ScorerView::on_zeroSling3_clicked()
+{
+    this->SlingThreeText->setText(QString::number(0));
+    this->repaint();
 }

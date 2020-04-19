@@ -26,7 +26,6 @@ public:
     int matchesHeld;
     int ties;
     int startScore;
-
 private:
 
     //every winning throw in string form in an array
